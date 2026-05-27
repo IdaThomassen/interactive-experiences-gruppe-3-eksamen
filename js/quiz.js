@@ -114,3 +114,26 @@ function gemSvar(spoergsmaalId, svar) {
     console.log(brugerSvar);
   }
 }
+
+//<----- Eget svar ----->
+//Her laver vi så at eget svar bliver trimmet og gjort til små bogstaver.
+
+egetSvarBoble.addEventListener("click", () => {
+  //Her er så det er muligt at klikke på knappen
+  const tekst = egetSvar.value.trim().toLowerCase(); //Her gemmer vi det der står i inputfeltet i en variable, og der bliver også trimmet og gjort til små bogstaver for at sikre et ensartet format.
+
+  if (tekst === "") return; //Her bliver der tjekket om der er tilføjet tekst i inputfeltet. Hvis det er tomt, så sker der ikke noget.
+
+  const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; //Her gemmer vi det spørgsmål vi er kommet til i en variable, så vi kan bruge det i funktionen gemSvar.
+
+  gemSvar(spoergsmaalData.id, tekst); //Funktionen gemSvar sender spørgsmålets id videre sammen med den teskt der et i inputfeltet, så det kan gemmes på samme måde som de andre svar.
+});
+
+//<----- Wordcloud funktionen ----->
+//Her laver vi så at wordclouden fungere
+
+function visWordcloud() {
+  const svar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; //Her henter vi svarene fra local storage, hvor den leder efter "wordcloudSvar". Hvis der ikke er noget i local storage, så starter den med et tomt array.
+
+  wordcloudContainerId.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
+}
