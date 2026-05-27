@@ -2,3 +2,4 @@
 
 Dette er vores eksamen opgave for Interactive Experiences. Vi er gruppe 3. Ida, Josephine, Melissa og Yulia
 Vi har valgt at bruge camelCase
+Sådan skriver vi titler på det vi laver //<----- Titel ----->
