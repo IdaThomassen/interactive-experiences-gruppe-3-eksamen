@@ -62,16 +62,21 @@ const svarBobler = document.getElementById("svarBobler");
 const egetSvar = document.getElementById("egetSvar");
 const egetSvarBoble = document.getElementById("egetSvarBoble");
 
-
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
 function visSpoergsmaal() {
-const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal];
-spoergsmaalTekst.textContent = spoergsmaalData.tekst;
-svarBobler.innerHTML = "";
-egetSvar.value = "";
+  const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
+  spoergsmaalTekst.textContent = spoergsmaalData.tekst; // Her ændrer vi teksten i vores html element til det spørgsmål vi er kommet til.
+  svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
+  egetSvar.value = ""; // Her sker det samme, bare med svarinput.
 
+  spoergsmaalData.svarmuligheder.forEach((svar) => {
+    //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
+    const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
+    boble.textContent = svar; // Her indsættes nye svarmuligheder og giver boblen den tekst, som svaret har.
+    boble.addEventListener("click", () => {
+      gemSvar(spoergsmaalData.id, svar);
+    }); // Nu har vi tilføjet at når man klikker på boblen (knappen) så afyres en funktion der gemmer det svar.
 
-
-
-
+    svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
+  });
 }
