@@ -65,7 +65,7 @@ const egetSvarBoble = document.getElementById("egetSvarBoble");
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
 function visSpoergsmaal() {
   const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
-  spoergsmaalTekst.textContent = spoergsmaalData.tekst; // Her ændrer vi teksten i vores html element til det spørgsmål vi er kommet til.
+  spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Her ændrer vi teksten i vores html element til det spørgsmål vi er kommet til.
   svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
   egetSvar.value = ""; // Her sker det samme, bare med svarinput.
 
@@ -123,7 +123,6 @@ egetSvarBoble.addEventListener("click", () => {
   const tekst = egetSvar.value.trim().toLowerCase(); //Her gemmer vi det der står i inputfeltet i en variable, og der bliver også trimmet og gjort til små bogstaver for at sikre et ensartet format.
 
   if (tekst === "") return; //Her bliver der tjekket om der er tilføjet tekst i inputfeltet. Hvis det er tomt, så sker der ikke noget.
-
   const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; //Her gemmer vi det spørgsmål vi er kommet til i en variable, så vi kan bruge det i funktionen gemSvar.
 
   gemSvar(spoergsmaalData.id, tekst); //Funktionen gemSvar sender spørgsmålets id videre sammen med den teskt der et i inputfeltet, så det kan gemmes på samme måde som de andre svar.
@@ -136,38 +135,40 @@ function visWordcloud() {
   const svar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; //Her henter vi svarene fra local storage, hvor den leder efter "wordcloudSvar". Hvis der ikke er noget i local storage, så starter den med et tomt array.
 
   wordcloudContainerId.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
+
+  // I vores wordcloud, jo flere gange et ord bliver gentaget, jo større bliver ordet i wordcloud.
+  const count = {}; // Vi laver et tomt objekt, hvor vi gemmer det i variablen (count)
+
+  for (let ord of svar) {
+    // Vi laver et loop, hvor for hvert ord der er i listens, bliver det ord lagt over i let ord variablen.
+
+    ord = ord.trim().toLowerCase(); // Ordet bliver trimmet og sat til lowercase, så alle ord bliver ensartet format.
+
+    if (count[ord]) {
+      // Her tjekker den , hvor mange gange et ord optræder på listen.
+      count[ord]++; //Hvis ordet findes lægger den 1 point til, hvis ikke det findes for det 1 point. Jo flere gange den optræder , jo flere point får den.
+    } else {
+      count[ord] = 1; // hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
+    }
+  }
+
+  // vis ord
+
+  for (let ord in count) {
+    // For hvert ord i vores const count.
+    const span = document.createElement("span"); // For hvert ord opretter vi et span element.
+    span.classList.add("word"); // Som vi tilføjes word.
+    span.textContent = ord; // Teksten inde i span element, bliver til selve ordet.
+    const størrelse = 16 + count[ord] * 12; // Her bestemmer vi størrelsen på ordet. Jo flere gange det optræder, jo større bliver det.
+    span.style.fontSize = størrelse + "px"; // Her sætter vi størrelsen på ordet ved at bruge style.fontSize og tilføje "px" for at gøre det til pixels.
+    wordcloudContainerId.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
+  }
 }
 
-// I vores wordcloud, jo flere gange et ord bliver gentaget, jo større bliver ordet i wordcloud.
-const count = {}; // Vi laver et tomt objekt, hvor vi gemmer det i variablen (count)
-
-for (let ord of svar) { // Vi laver et loop, hvor for hvert ord der er i listens, bliver det ord lagt over i let ord variablen.
-
-ord=ord.trim ().toLowerCase(); // Ordet bliver trimmet og sat til lowercase, så alle ord bliver ensartet format.
-
-if (count[ord]){ // Her tjekker den , hvor mange gange et ord optræder på listen.
-count[ord]++; //Hvis ordet findes lægger den 1 point til, hvis ikke det findes for det 1 point. Jo flere gange den optræder , jo flere point får den. 
-} else{
-count [ord] = 1; // hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
-}
-}
-
-// vis ord
-
-for (let ord in count) { // For hvert ord i vores const count.
-const span = document.createElement ("span"); // For hvert ord opretter vi et span element.
-span.classList.add("word"); // Som vi tilføjes word.
-span.textContent = ord; // Teksten inde i span element, bliver til selve ordet.
-const størrelse = 16 + count[ord]*12; // Her bestemmer vi størrelsen på ordet. Jo flere gange det optræder, jo større bliver det.  
-span.style.fontSize = størrelse + "px"; // Her sætter vi størrelsen på ordet ved at bruge style.fontSize og tilføje "px" for at gøre det til pixels.
-wordcloudContainerId.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
-
-} 
-
-resetButton.addEventListener("click", () => { 
+resetKnapId.addEventListener("click", () => {
   localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
-  visWordcloud(); 
+  visWordcloud();
 });
 
 visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
-visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind. 
+visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind.
