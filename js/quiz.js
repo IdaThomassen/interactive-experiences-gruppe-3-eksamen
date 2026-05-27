@@ -61,3 +61,17 @@ const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
 const svarBobler = document.getElementById("svarBobler");
 const egetSvar = document.getElementById("egetSvar");
 const egetSvarBoble = document.getElementById("egetSvarBoble");
+
+
+//<----- Her kommer en funktion der skal vise spørgsmålene ----->
+function visSpoergsmaal() {
+const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal];
+spoergsmaalTekst.textContent = spoergsmaalData.tekst;
+svarBobler.innerHTML = "";
+egetSvar.value = "";
+
+
+
+
+
+}
