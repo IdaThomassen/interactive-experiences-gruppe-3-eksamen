@@ -80,3 +80,24 @@ function visSpoergsmaal() {
     svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
   });
 }
+
+//<----- Funktion til at gemme svar ----->
+function gemSvar(spoergsmaalId, svar) {
+  //Her opretter vi en funktion gemSvar med parameterne spoergsmaalId, svar
+  svar = svar.trim().toLowerCase(); // Her bliver svaret trimmet og gjort til små bogstaver, for at sørge for at vi får et ensartet format.
+
+  brugerSvar[spoergsmaalId] = svar; // Svaret bliver gemt i brugerSvar efter det er gjort ensartet.
+
+  // I vores løsning vil vi kun gemme svarene til spørgsmål 3 i local storage, derfor laver vi et if statement
+  if (spoergsmaalId === 3) {
+    //Vi tjekker derfor om spoergsmaalId er 3. Det gør vi ved at bruge === som tjekker om både værdien og datatypen er 100% den samme.
+    const gamleSvar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; // gamle svar bliver hentet fra local storage, hvor den leder efter "wordcloudSvar" ved at bruge JSON.parse bliver teksten lavet til javascript data (skriv mere senere).
+
+    gamleSvar.push(svar); // Her pushes det nye svar ind i arrayet af gamle svar.
+    localStorage.setItem("wordcloudSvar", JSON.stringify(gamleSvar)); // Her gemmer vi den opdaterede liste af svar i local storage og bruger .JSON.stringify for at lave arrayet tilbage til en string.
+
+    visWordcloud(); // Funktion kaldes på så wordclouden vises med de nye svar.
+  }
+
+  //Her kommer næste spørgsmål
+}
