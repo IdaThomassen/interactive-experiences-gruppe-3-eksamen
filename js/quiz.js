@@ -137,3 +137,25 @@ function visWordcloud() {
 
   wordcloudContainerId.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
 }
+
+// I vores wordcloud, jo flere gange et ord bliver gentaget, jo større bliver ordet i wordcloud.
+const count = {}; // Vi laver et tomt objekt, hvor vi gemmer det i variablen (count)
+
+for (let ord of svar) { // Vi laver et loop, hvor for hvert ord der er i listens, bliver det ord lagt over i let ord variablen.
+
+ord=ord.trim ().toLowerCase(); // Ordet bliver trimmet og sat til lowercase, så alle ord bliver ensartet format.
+
+if (count[ord]){ // Her tjekker den , hvor mange gange et ord optræder på listen.
+count[ord]++; //Hvis ordet findes lægger den 1 point til, hvis ikke det findes for det 1 point. Jo flere gange den optræder , jo flere point får den. 
+} else{
+count [ord] = 1; // hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
+}
+}
+
+// vis ord
+
+for (let ord in count) { // For hvert ord i vores const count.
+const span = document.createElement ("span"); // For hvert ord opretter vi et span element.
+span.classList.add("word"); // Som vi tilføjes word.
+span.textContent = ord; // Teksten inde i span element, bliver til selve ordet.
+}
