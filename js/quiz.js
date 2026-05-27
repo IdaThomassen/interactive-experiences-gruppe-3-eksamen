@@ -53,3 +53,11 @@ let nuvaerendeSpoergsmaal = 0;
 
 //Her har vi lavet et tomt objekt, som vi bruger til at samle de svar vi for fra de besøgende.
 const brugerSvar = {};
+
+//<----- HTML ELEMENTER ----->
+
+//For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
+const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
+const svarBobler = document.getElementById("svarBobler");
+const egetSvar = document.getElementById("egetSvar");
+const egetSvarBoble = document.getElementById("egetSvarBoble");
