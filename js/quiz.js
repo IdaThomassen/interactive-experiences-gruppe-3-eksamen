@@ -158,4 +158,16 @@ for (let ord in count) { // For hvert ord i vores const count.
 const span = document.createElement ("span"); // For hvert ord opretter vi et span element.
 span.classList.add("word"); // Som vi tilføjes word.
 span.textContent = ord; // Teksten inde i span element, bliver til selve ordet.
-}
+const størrelse = 16 + count[ord]*12; // Her bestemmer vi størrelsen på ordet. Jo flere gange det optræder, jo større bliver det.  
+span.style.fontSize = størrelse + "px"; // Her sætter vi størrelsen på ordet ved at bruge style.fontSize og tilføje "px" for at gøre det til pixels.
+wordcloudContainerId.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
+
+} 
+
+resetButton.addEventListener("click", () => { 
+  localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
+  visWordcloud(); 
+});
+
+visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
+visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind. 
