@@ -100,4 +100,17 @@ function gemSvar(spoergsmaalId, svar) {
   }
 
   //Her kommer næste spørgsmål
+  nuvaerendeSpoergsmaal++; // ++ bruges til at øge værdien af nuvaerendeSpoergsmaal med 1, og dermed gå til næste spørgsmål. Altså hvis vi er ved spørgsmål 1, der bliver der plusset 1 på spørgsmålet og det bliver til 2, og så viser den spørgsmål 2.
+  if (nuvaerendeSpoergsmaal < spoergsmaal.length) {
+    //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet spoergsmaal
+    visSpoergsmaal(); //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
+  } else {
+    //ellers så viser den følgende:
+    spoergsmaalTekst.textContent = "Tak for vise dit indre"; // Her ændres teksten til en tak for at deltage
+    svarBobler.innerHTML = ""; //Her tømmer vi indholdet i boblerne
+    egetSvar.style.display = "none"; //Her får vi inputsfeltet med eget svar til at forvinde
+    egetSvarBoble.style.display = "none"; //Her får vi knappen til inputsfeltet til at forsvinde
+
+    console.log(brugerSvar);
+  }
 }
