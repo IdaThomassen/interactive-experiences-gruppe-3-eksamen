@@ -66,10 +66,10 @@ let nuvaerendeSpoergsmaal = 0;
 //Her har vi lavet et tomt objekt, som vi bruger til at samle de svar vi for fra de besøgende.
 const brugerSvar = {};
 
-//<----- HTML ELEMENTER ----->
+//<----- HTML elementer ----->
 
 //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
-const introTekst = document.getElementById("introTekst");
+const inaktivTekst = document.getElementById("inaktivTekst");
 const quiz = document.querySelector(".quiz");
 const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
 const svarBobler = document.getElementById("svarBobler");
@@ -78,6 +78,41 @@ const egetSvarBoble = document.getElementById("egetSvarBoble");
 const wordcloudContainer = document.getElementById("wordcloudContainerId");
 const wordcloudId = document.getElementById("wordcloudId");
 const resetKnap = document.getElementById("resetKnapId");
+
+//<----- Intro funktion ----->
+
+//Vi skal lave en funktion som viser vores introtekster, denne funktion kalder vi for visIntro()
+function visIntro() {
+  inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
+
+  setTimeout(() => { //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools). 
+    inaktivTekst.textContent = introTekster[introStep]; // Her ændrer vi teksten i vores html element til den nuværende introtekst.
+    inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder.
+  }, 1000);
+}
+
+//<----- Flow ----->
+
+//Man skal klikke sig igennem flowet
+
+document.body.addEventListener("click", startFlow); //Her har vi tilføjet en event listener til hele body element, hvor vi har sagt den skal lytte efter et click og derefter affyre funktionen startFlow.
+
+function startFlow(event) { // Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på.
+  if (
+    event.target.tagName === "BUTTON" || // hvis der bliver klikket på en knap
+    event.target.tagName === "INPUT" // hvis der bliver klikket på et input felt
+  ) {
+    return; // Hvis der bliver klikket på en knap eller et input felt, så stopper vi funktionen her.
+  }
+
+  if (introStep < introTekster.length - 1) { // hvis introStep er mindre end længden af introTekster, så
+    introStep++; // så øger vi introStep med 1, så vi kommer til næste introtekst.
+    visIntro(); // denne viser den næste introtekst.
+  }
+
+}
+
+
 
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
 function visSpoergsmaal() {
