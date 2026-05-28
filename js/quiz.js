@@ -140,6 +140,9 @@ function visSpoergsmaal() {
   spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
 
   }, 1000); // Her sætter vi tiden til 1 sekund.
+
+  // svar kommer senere
+  setTimeout (() => { // efter 4 sekunder,så sker der følgende
   
   spoergsmaalData.svarmuligheder.forEach((svar) => {
     //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
@@ -151,6 +154,9 @@ function visSpoergsmaal() {
 
     svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
   });
+  svarBobler.style.opacity = 1; // Boblerne bliver helt synlig
+
+  }, 4000); //Her sætter vi tiden til 4 sekunder.
 }
 
 //<----- Funktion til at gemme svar ----->
