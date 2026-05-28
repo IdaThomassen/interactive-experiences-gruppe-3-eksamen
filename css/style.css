@@ -1,19 +1,35 @@
-#inaktivTekst{
-  color: rgb(255, 255, 255);
-
- 
-
+/*<-----Vores root----->*/
+/*Her definerer vi faste variabler som vi bruger i hele dokumentet*/
+:root {
+  --tekst: #ffffff;
+  --font: georgia, serif;
 }
 
+/*<-----Body----->*/
 body {
-  background-color:plum;
+  background-color: plum;
+  font-family: var(--font);
+  color: var(--tekst);
 
-    display: flex;
-    text-align: center;
-    height: 100vh;
-    margin: 0;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /**/
+  align-items: center;
+
+  text-align: center;
+  height: 100vh;
+  margin: 0;
+
+  overflow: hidden; /*Her gemmer vi det indhold som er uden for skærmen*/
+}
+
+/*<-----Intro teksten----->*/
+#inaktivTekst {
+  font-size: 4.5em;
+  opacity: 0; /*Denne gør teksten usynlig*/
+  transition: opacity 5s; /*Med denne linje animere vi med en transition, som gør den fra usynlig til synlig på 5 sek*/
+}
+
+.vis {
+  opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
 }
