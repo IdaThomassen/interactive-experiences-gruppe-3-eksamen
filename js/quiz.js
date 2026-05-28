@@ -85,7 +85,8 @@ const resetKnap = document.getElementById("resetKnapId");
 function visIntro() {
   inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
 
-  setTimeout(() => { //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools). 
+  setTimeout(() => {
+    //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
     inaktivTekst.textContent = introTekster[introStep]; // Her ændrer vi teksten i vores html element til den nuværende introtekst.
     inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder.
   }, 1000);
@@ -97,7 +98,8 @@ function visIntro() {
 
 document.body.addEventListener("click", startFlow); //Her har vi tilføjet en event listener til hele body element, hvor vi har sagt den skal lytte efter et click og derefter affyre funktionen startFlow.
 
-function startFlow(event) { // Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på.
+function startFlow(event) {
+  // Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på.
   if (
     event.target.tagName === "BUTTON" || // hvis der bliver klikket på en knap
     event.target.tagName === "INPUT" // hvis der bliver klikket på et input felt
@@ -105,25 +107,25 @@ function startFlow(event) { // Her har vi lavet en funktion startFlow, som tager
     return; // Hvis der bliver klikket på en knap eller et input felt, så stopper vi funktionen her.
   }
 
-  if (introStep < introTekster.length - 1) { // hvis introStep er mindre end længden af introTekster, så
+  if (introStep < introTekster.length - 1) {
+    // hvis introStep er mindre end længden af introTekster, så
     introStep++; // så øger vi introStep med 1, så vi kommer til næste introtekst.
     visIntro(); // denne viser den næste introtekst.
-  }
-
-  else if ( // Hvis vi er kommet til den sidste introtekst, så starter quizzen.
-    introStep === introTekster.length - 1 // Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1.
+  } else if (
+    // Hvis vi er kommet til den sidste introtekst, så starter quizzen.
+    introStep ===
+    introTekster.length - 1 // Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1.
   ) {
-    inaktivTekst.classList.remove("vis");  //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
-    setTimeout(() => { // Efter 2,5 sekunder (2500 ms), så sker følgende:
+    inaktivTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
+    setTimeout(() => {
+      // Efter 2,5 sekunder (2500 ms), så sker følgende:
       inaktivTekst.style.display = "none"; // Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none".
       quiz.style.display = "block"; // Her får vi quiz elementet til at dukke op ved at sætte display til "block".
       visSpoergsmaal(); // Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter.
     }, 2500); // Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder.
-    introStep++; 
+    introStep++;
   }
 }
-
-
 
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
 function visSpoergsmaal() {
@@ -135,28 +137,28 @@ function visSpoergsmaal() {
   spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
 
   //spørgsmål fader ind
-  setTimeout (() => { // Efter 1 sekund (1000 ms), så sker følgende:
-  spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
-  spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
-
+  setTimeout(() => {
+    // Efter 1 sekund (1000 ms), så sker følgende:
+    spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
+    spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
   }, 1000); // Her sætter vi tiden til 1 sekund.
 
   // svar kommer senere
-  setTimeout (() => { // efter 4 sekunder,så sker der følgende
-  
-  spoergsmaalData.svarmuligheder.forEach((svar) => {
-    //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
-    const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
-    boble.textContent = svar; // Her indsættes nye svarmuligheder og giver boblen den tekst, som svaret har.
-    boble.addEventListener("click", () => {
-      gemSvar(spoergsmaalData.id, svar);
-    }); // Nu har vi tilføjet at når man klikker på boblen (knappen) så afyres en funktion der gemmer det svar.
+  setTimeout(() => {
+    // efter 4 sekunder,så sker der følgende
 
-    svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
-  });
-  svarBobler.style.opacity = 1; // Boblerne bliver helt synlig
+    spoergsmaalData.svarmuligheder.forEach((svar) => {
+      //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
+      const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
+      boble.textContent = svar; // Her indsættes nye svarmuligheder og giver boblen den tekst, som svaret har.
+      boble.addEventListener("click", () => {
+        gemSvar(spoergsmaalData.id, svar);
+      }); // Nu har vi tilføjet at når man klikker på boblen (knappen) så afyres en funktion der gemmer det svar.
 
-  }, 4000); //Her sætter vi tiden til 4 sekunder.
+      svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
+    });
+    svarBobler.style.opacity = 1; // Boblerne bliver helt synlig
+  }, 2000); //Her sætter vi tiden til 2 sekunder.
 }
 
 //<----- Funktion til at gemme svar ----->
@@ -173,8 +175,6 @@ function gemSvar(spoergsmaalId, svar) {
 
     gamleSvar.push(svar); // Her pushes det nye svar ind i arrayet af gamle svar.
     localStorage.setItem("wordcloudSvar", JSON.stringify(gamleSvar)); // Her gemmer vi den opdaterede liste af svar i local storage og bruger .JSON.stringify for at lave arrayet tilbage til en string.
-
-    visWordcloud(); // Funktion kaldes på så wordclouden vises med de nye svar.
   }
 
   //Her kommer næste spørgsmål
@@ -184,12 +184,17 @@ function gemSvar(spoergsmaalId, svar) {
     visSpoergsmaal(); //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
   } else {
     //ellers så viser den følgende:
-    spoergsmaalTekst.textContent = "Tak for vise dit indre"; // Her ændres teksten til en tak for at deltage
-    svarBobler.innerHTML = ""; //Her tømmer vi indholdet i boblerne
-    egetSvar.style.display = "none"; //Her får vi inputsfeltet med eget svar til at forvinde
-    egetSvarBoble.style.display = "none"; //Her får vi knappen til inputsfeltet til at forsvinde
+    quiz.style.display = "none";
+    wordcloudId.style.display = "block";
+    visWordcloud(); // Funktion kaldes på så wordclouden vises med de nye svar.
 
-    console.log(brugerSvar);
+    // SKAL MÅSKE ÆNDRES
+    // spoergsmaalTekst.textContent = "Tak for vise dit indre"; // Her ændres teksten til en tak for at deltage
+    // svarBobler.innerHTML = ""; //Her tømmer vi indholdet i boblerne
+    // egetSvar.style.display = "none"; //Her får vi inputsfeltet med eget svar til at forvinde
+    // egetSvarBoble.style.display = "none"; //Her får vi knappen til inputsfeltet til at forsvinde
+
+    // console.log(brugerSvar);
   }
 }
 
@@ -248,5 +253,7 @@ resetKnap.addEventListener("click", () => {
   visWordcloud();
 });
 
-visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
-visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind.
+inaktivTekst.classList.add("vis");
+
+// visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
+// visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind.
