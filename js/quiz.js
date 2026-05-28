@@ -1,5 +1,17 @@
 "use strict";
 
+//<----- Intro tekster ----->
+const introTekster = [
+  `Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
+  Hvem ser de? Hvem er du? 
+  Museets kunstnere malede deres inderside. Deres frygt, drømme, tanker og splittelse. 
+  Mange mennekser skjuler tanker om sig selv. 
+  Tanker de tror, de står alene med. 
+  Denne oplevelse handler om dig og din identiet, sårbarhed og hvordan vi ser os selv hvordan andre ser os.`,
+];
+
+let introStep = 0; // Vi laver en variable der hedder introStep, som starter på 0, så vi kan holde styr på hvilket intro tekst vi er kommet til.
+
 //<----- Array med spørgsmål ----->
 //Her har vi spørgsmål til vores quiz og svarmuligheder. Det er et array med objekter, hvert objekt er et spørgsmål. Hvert spørgsmål har en id, en tekst og et array med svarmuligheder.
 
@@ -57,11 +69,14 @@ const brugerSvar = {};
 //<----- HTML ELEMENTER ----->
 
 //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
+const introTekst = document.getElementById("introTekst");
+const quiz = document.querySelector(".quiz");
 const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
 const svarBobler = document.getElementById("svarBobler");
 const egetSvar = document.getElementById("egetSvar");
 const egetSvarBoble = document.getElementById("egetSvarBoble");
 const wordcloudContainer = document.getElementById("wordcloudContainerId");
+const wordcloudId = document.getElementById("wordcloudId");
 const resetKnap = document.getElementById("resetKnapId");
 
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
