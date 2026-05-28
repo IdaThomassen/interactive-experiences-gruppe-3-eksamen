@@ -110,6 +110,17 @@ function startFlow(event) { // Her har vi lavet en funktion startFlow, som tager
     visIntro(); // denne viser den næste introtekst.
   }
 
+  else if ( // Hvis vi er kommet til den sidste introtekst, så starter quizzen.
+    introStep === introTekster.length - 1 // Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1.
+  ) {
+    inaktivTekst.classList.remove("vis"); // Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
+    setTimeout(() => { // Efter 2,5 sekunder (2500 ms), så sker følgende:
+      inaktivTekst.style.display = "none"; // Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none".
+      quiz.style.display = "block"; // Her får vi quiz elementet til at dukke op ved at sætte display til "block".
+      visSpoergsmaal(); // Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter.
+    }, 2500); // Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder.
+    introStep++; 
+  }
 }
 
 
