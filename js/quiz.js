@@ -61,6 +61,8 @@ const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
 const svarBobler = document.getElementById("svarBobler");
 const egetSvar = document.getElementById("egetSvar");
 const egetSvarBoble = document.getElementById("egetSvarBoble");
+const wordcloudContainer = document.getElementById("wordcloudContainerId");
+const resetKnap = document.getElementById("resetKnapId");
 
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
 function visSpoergsmaal() {
@@ -134,7 +136,7 @@ egetSvarBoble.addEventListener("click", () => {
 function visWordcloud() {
   const svar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; //Her henter vi svarene fra local storage, hvor den leder efter "wordcloudSvar". Hvis der ikke er noget i local storage, så starter den med et tomt array.
 
-  wordcloudContainerId.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
+  wordcloudContainer.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
 
   // I vores wordcloud, jo flere gange et ord bliver gentaget, jo større bliver ordet i wordcloud.
   const count = {}; // Vi laver et tomt objekt, hvor vi gemmer det i variablen (count)
@@ -161,11 +163,11 @@ function visWordcloud() {
     span.textContent = ord; // Teksten inde i span element, bliver til selve ordet.
     const størrelse = 16 + count[ord] * 12; // Her bestemmer vi størrelsen på ordet. Jo flere gange det optræder, jo større bliver det.
     span.style.fontSize = størrelse + "px"; // Her sætter vi størrelsen på ordet ved at bruge style.fontSize og tilføje "px" for at gøre det til pixels.
-    wordcloudContainerId.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
+    wordcloudContainer.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
   }
 }
 
-resetKnapId.addEventListener("click", () => {
+resetKnap.addEventListener("click", () => {
   localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
   visWordcloud();
 });
