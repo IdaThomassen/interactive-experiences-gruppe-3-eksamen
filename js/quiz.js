@@ -1,15 +1,15 @@
 "use strict";
 
 //<----- Webcam spejl ----->
-async function startWebcam () { //venter adgang til kameraet 
-const stream = await navigator.mediaDevices.getUserMedia ({ video:true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
-document.getElementById('webcam').srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
-  
+async function startWebcam() { //venter adgang til kameraet
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
+  document.getElementById("webcam").srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
 }
 startWebcam(); //funktionen kører nu
 
 //<----- Intro tekster ----->
 const introTekster = [
+  `Træd tættere på og se dig selv i øjnene`,
   `Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
   Hvem ser de? Hvem er du? 
   Museets kunstnere malede deres inderside. Deres frygt, drømme, tanker og splittelse. 
@@ -93,11 +93,22 @@ const resetKnap = document.getElementById("resetKnapId");
 function visIntro() {
   inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
 
-  setTimeout(() => {
-    //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
+  setTimeout(() => { //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
+   
+    //Vi vil have lavet sådan at hver af de to intro tekster for hver deres class navn, så vi kan style dem forskeligt inde i css.
+    inaktivTekst.classList.remove("introEt", "introTo"); //Derfor sørger vi for at fjerne de to class navne, så vi ikke risikere at den ikke med at have begge på en gang.
+
+    if (introStep === 0) { // denne sætning siger at hvis introStep er lige med 0 både datatypen og værdien (0 er index tallet)
+      inaktivTekst.classList.add("introEt"); // så tilføjer vi classen introEt
+    }
+
+    if (introStep === 1) { //hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
+      inaktivTekst.classList.add("introTo"); // så tilføjer vi classen introTo
+    }
+
     inaktivTekst.textContent = introTekster[introStep]; // Her ændrer vi teksten i vores html element til den nuværende introtekst.
-    inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder.
-  }, 1000);
+    inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
+  }, 1000); 
 }
 
 //<----- Flow ----->

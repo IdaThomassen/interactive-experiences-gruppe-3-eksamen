@@ -30,6 +30,7 @@ body {
   transition: opacity 5s; /*Med denne linje animere vi med en transition, som gør den fra usynlig til synlig på 5 sek*/
 }
 
+
 .vis {
   opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
 }
