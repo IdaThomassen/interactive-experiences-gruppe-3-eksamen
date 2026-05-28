@@ -1,7 +1,8 @@
 "use strict";
 
 //<----- Webcam spejl ----->
-async function startWebcam() { //venter adgang til kameraet
+async function startWebcam() {
+  //venter adgang til kameraet
   const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
   document.getElementById("webcam").srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
 }
@@ -93,22 +94,25 @@ const resetKnap = document.getElementById("resetKnapId");
 function visIntro() {
   inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
 
-  setTimeout(() => { //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
-   
+  setTimeout(() => {
+    //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
+
     //Vi vil have lavet sådan at hver af de to intro tekster for hver deres class navn, så vi kan style dem forskeligt inde i css.
     inaktivTekst.classList.remove("introEt", "introTo"); //Derfor sørger vi for at fjerne de to class navne, så vi ikke risikere at den ikke med at have begge på en gang.
 
-    if (introStep === 0) { // denne sætning siger at hvis introStep er lige med 0 både datatypen og værdien (0 er index tallet)
+    if (introStep === 0) {
+      // denne sætning siger at hvis introStep er lige med 0 både datatypen og værdien (0 er index tallet)
       inaktivTekst.classList.add("introEt"); // så tilføjer vi classen introEt
     }
 
-    if (introStep === 1) { //hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
+    if (introStep === 1) {
+      //hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
       inaktivTekst.classList.add("introTo"); // så tilføjer vi classen introTo
     }
 
     inaktivTekst.textContent = introTekster[introStep]; // Her ændrer vi teksten i vores html element til den nuværende introtekst.
     inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
-  }, 2000); 
+  }, 2000);
 }
 
 //<----- Flow ----->
@@ -276,3 +280,18 @@ inaktivTekst.classList.add("vis");
 
 // visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
 // visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind.
+
+//<----- Restart flowet ----->
+
+// Dette er en funktion der først går i gang, når man trykker på knappen.
+function restartFlow() {
+  nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstillede og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0.
+  introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten.
+  wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none".
+  inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block".
+  inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
+  inaktivTekst.classList.add("vis"); //Tilføjer css clssen "vis" til inaktivTekst, så den bliver synlig igen.
+  quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none".
+}
+
+restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra.

@@ -54,7 +54,7 @@ h1 {
 #spoergsmaalTekst {
   color: white; /* Farven på spørgsmålet bliver hvide */
   opacity: 0; /*Denne gør teksten usynlig*/
-  transition: opacity 2.5s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 2.5 sek*/
+  transition: opacity 1s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
 }
 
 video#webcam {
@@ -66,4 +66,28 @@ video#webcam {
   object-fit: cover; /* Videocam fylder hele hele skærmen*/
   z-index: -1; /* placere elementer bagved de andre elementer*/
   transform: scaleX(-1); /* Spejlvender videoen*/
+}
+
+.wordcloud {
+  display: none; /* Det her gør at teksten “Du er aldrig alene - mange andre har det ligesom dig” bliver gemt indtil man har svaret på spørgsmålene */
+}
+
+/*<-----Restart knappen----->*/
+#restartKnap {
+  position: fixed; /*Positionen af knappen*/
+  top: 0px;
+  right: 20px;
+
+  padding: 8px 16px;
+
+  font-size: 4rem; /*Størrelsen på symbolet*/
+  color: var(--tekst);
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer; /*Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
+
+  z-index: 2000;
+  background-color: transparent; /*Gør at knappen bliver gennemsigtigt*/
 }
