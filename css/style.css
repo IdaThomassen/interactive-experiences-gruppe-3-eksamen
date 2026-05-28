@@ -25,37 +25,45 @@ body {
 
 /*<-----Intro teksten----->*/
 #inaktivTekst {
-  font-size: 4.5em;
   opacity: 0; /*Denne gør teksten usynlig*/
-  transition: opacity 5s; /*Med denne linje animere vi med en transition, som gør den fra usynlig til synlig på 5 sek*/
+  transition: opacity 2s ease; /*Med denne linje animere vi med en transition, som gør den fra usynlig til synlig på 2 sek*/
 }
 
+h1 {
+  font-size: 4.5em;
+}
+
+.introTo {
+  font-size: 3em;
+  max-width: 75%;
+  line-height: 1.5em;
+}
 
 .vis {
   opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
 }
 
 /*<-----Quiz----->*/
-.quiz { /* quiz sektionen */
+.quiz {
+  /* quiz sektionen */
   display: none; /* quiz sektionen bliver skjult */
   width: 80%; /* quiz sektionen fylder 80% af bredden */
   max-width: 800px; /* quiz sektionen har en maksimal bredde på 800px */
 }
 
-#spoergsmaalTekst { 
+#spoergsmaalTekst {
   color: white; /* Farven på spørgsmålet bliver hvide */
   opacity: 0; /*Denne gør teksten usynlig*/
   transition: opacity 2.5s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 2.5 sek*/
 }
 
 video#webcam {
-
-position:fixed; /* Dette gør at skærmen bliver fastlåst uden scoll*/
-top: 0; left: 0; /* Starter i toppen men i venstre hjørne*/
-width: 100%; /*Fylder hele bredden*/
-height: 100%; /* fylder højden af skærmen*/
-object-fit: cover; /* Videocam fylder hele hele skærmen*/
-z-index: -1; /* placere elementer bagved de andre elementer*/
-
+  position: fixed; /* Dette gør at skærmen bliver fastlåst uden scoll*/
+  top: 0;
+  left: 0; /* Starter i toppen men i venstre hjørne*/
+  width: 100%; /*Fylder hele bredden*/
+  height: 100%; /* fylder højden af skærmen*/
+  object-fit: cover; /* Videocam fylder hele hele skærmen*/
+  z-index: -1; /* placere elementer bagved de andre elementer*/
+  transform: scaleX(-1); /* Spejlvender videoen*/
 }
-

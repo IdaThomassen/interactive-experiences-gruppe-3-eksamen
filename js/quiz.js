@@ -108,7 +108,7 @@ function visIntro() {
 
     inaktivTekst.textContent = introTekster[introStep]; // Her ændrer vi teksten i vores html element til den nuværende introtekst.
     inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
-  }, 1000); 
+  }, 2000); 
 }
 
 //<----- Flow ----->
