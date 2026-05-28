@@ -113,7 +113,7 @@ function startFlow(event) { // Her har vi lavet en funktion startFlow, som tager
   else if ( // Hvis vi er kommet til den sidste introtekst, så starter quizzen.
     introStep === introTekster.length - 1 // Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1.
   ) {
-    inaktivTekst.classList.remove("vis"); // Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
+    inaktivTekst.classList.remove("vis");  //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
     setTimeout(() => { // Efter 2,5 sekunder (2500 ms), så sker følgende:
       inaktivTekst.style.display = "none"; // Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none".
       quiz.style.display = "block"; // Her får vi quiz elementet til at dukke op ved at sætte display til "block".
@@ -130,8 +130,17 @@ function visSpoergsmaal() {
   const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
   spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Her ændrer vi teksten i vores html element til det spørgsmål vi er kommet til.
   svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
+  svarBobler.style.opacity = 0; // Boblerne bliver usynligt
   egetSvar.value = ""; // Her sker det samme, bare med svarinput.
+  spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
 
+  //spørgsmål fader ind
+  setTimeout (() => { // Efter 1 sekund (1000 ms), så sker følgende:
+  spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
+  spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
+
+  }, 1000); // Her sætter vi tiden til 1 sekund.
+  
   spoergsmaalData.svarmuligheder.forEach((svar) => {
     //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
     const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
