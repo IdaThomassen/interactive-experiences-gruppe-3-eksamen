@@ -1,5 +1,13 @@
 "use strict";
 
+//<----- Webcam spejl ----->
+async function startWebcam () { //venter adgang til kameraet 
+const stream = await navigator.mediaDevices.getUserMedia ({ video:true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
+document.getElementById('webcam').srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
+  
+}
+startWebcam(); //funktionen kører nu
+
 //<----- Intro tekster ----->
 const introTekster = [
   `Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
