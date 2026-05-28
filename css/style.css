@@ -33,3 +33,16 @@ body {
 .vis {
   opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
 }
+
+/*<-----Quiz----->*/
+.quiz { /* quiz sektionen */
+  display: none; /* quiz sektionen bliver skjult */
+  width: 80%; /* quiz sektionen fylder 80% af bredden */
+  max-width: 800px; /* quiz sektionen har en maksimal bredde på 800px */
+}
+
+#spoergsmaalTekst { 
+  color: white; /* Farven på spørgsmålet bliver hvide */
+  opacity: 0; /*Denne gør teksten usynlig*/
+  transition: opacity 2.5s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 2.5 sek*/
+}
