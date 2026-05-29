@@ -77,6 +77,9 @@ h1 {
   width: 100%;
   height: 450px;
   margin-top: 20px;
+
+  opacity: 0;
+  transition: opacity 2s ease;
 }
 
 /*Boblerne*/
@@ -104,7 +107,11 @@ h1 {
   backdrop-filter: blur(6px);
   box-shadow: 0 4px 12px color(srgb 0, 0, 0, 0.2);
 
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+
+  animation: boblePuls 3s ease-in-out infinite; /*Her bliver den animation vi har lavet tilføjet til boblerne og kører i uendeligheder*/
 }
 
 /*Placering af alle boblerne*/
@@ -150,6 +157,29 @@ h1 {
   left: 80%;
 }
 
+/*Animation af bobler*/
+@keyframes boblePuls {
+  0% {
+    /*startpunktet*/
+    transform: scale(
+      1
+    ); /*boblen scalere op til 100% af dens normale størrelse*/
+  }
+
+  50% {
+    /*midtpunkt*/
+    transform: scale(
+      1.1
+    ); /*boblen scalere op til 200% af dens normale størrelse*/
+  }
+
+  100% {
+    /*slutpunkt*/
+    transform: scale(1); /*scalere ned til dens normale størrelse igen*/
+  }
+}
+
+/*<-----Webcam----->*/
 video#webcam {
   position: fixed; /* Dette gør at skærmen bliver fastlåst uden scoll*/
   top: 0;
@@ -163,6 +193,12 @@ video#webcam {
 
 .wordcloud {
   display: none; /* Det her gør at teksten “Du er aldrig alene - mange andre har det ligesom dig” bliver gemt indtil man har svaret på spørgsmålene */
+}
+
+.wordcloud h2 {
+  font-size: 3em;
+  margin-bottom: 0px;
+  /*Her skal der ændres i placeringen senere efter vi har stylet wordcloud*/
 }
 
 /*<-----Restart knappen----->*/

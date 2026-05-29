@@ -9,8 +9,8 @@ async function startWebcam() {
 startWebcam(); //funktionen kører nu
 
 //<----- Intro tekster ----->
-const introTekster = [ 
-  `Træd tættere på og se dig selv i øjnene`, // Vi har fjernet skjul fra teksten, så den er klar til at blive vist. Tilføjet også et html tag (span) med class linje. 
+const introTekster = [
+  `Træd tættere på og se dig selv i øjnene`, // Vi har fjernet skjul fra teksten, så den er klar til at blive vist. Tilføjet også et html tag (span) med class linje.
   `
  <span class="linje">Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
   Hvem ser de? Hvem er du?</span> 
@@ -165,7 +165,6 @@ function startFlow(event) {
 //<----- Her kommer en funktion der skal vise spørgsmålene ----->
 function visSpoergsmaal() {
   const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
-  spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Her ændrer vi teksten i vores html element til det spørgsmål vi er kommet til.
   svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
   svarBobler.style.opacity = 0; // Boblerne bliver usynligt
   egetSvar.value = ""; // Her sker det samme, bare med svarinput.
@@ -276,7 +275,7 @@ function visWordcloud() {
     // For hvert ord i vores const count.
     const span = document.createElement("span"); // For hvert ord opretter vi et span element.
     span.classList.add("word"); // Som vi tilføjes word.
-    span.textContent = ord; // Teksten inde i span element, bliver til selve ordet.
+    span.textContent = ord + " "; // Teksten inde i span element, bliver til selve ordet og der tilføjet et mellemrum med " ", så der er space mellem svarene.
     const størrelse = 16 + count[ord] * 12; // Her bestemmer vi størrelsen på ordet. Jo flere gange det optræder, jo større bliver det.
     span.style.fontSize = størrelse + "px"; // Her sætter vi størrelsen på ordet ved at bruge style.fontSize og tilføje "px" for at gøre det til pixels.
     wordcloudContainer.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
