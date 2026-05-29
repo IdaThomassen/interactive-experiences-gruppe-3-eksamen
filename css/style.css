@@ -3,6 +3,8 @@
 :root {
   --tekst: #ffffff;
   --font: georgia, serif;
+  --boblefarvekant: rgba(255, 255, 255, 0.6);
+  --boblebaggrund:rgba(255, 255, 255, 0.2);
 }
 
 /*<-----Body----->*/
@@ -68,6 +70,8 @@ h1 {
   transition: opacity 1s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
   font-size: 3em;
 }
+
+
 
 /*<-----Svarmuligheder Bobler----->*/
 
@@ -220,3 +224,53 @@ video#webcam {
   z-index: 2000;
   background-color: transparent; /*Gør at knappen bliver gennemsigtigt*/
 }
+
+
+  /* - inputsfelt */
+
+  #egetSvar {
+  
+  width: 350px;
+  height: 80px;
+
+  font-family: var(--font);
+  font-size: 1.5em;
+  text-align: center;
+
+  background-color:var(--boblebaggrund);
+  color: #000000; /*Denne ændre farven på skrivende tekst i "skriv dit eget svar"*/
+
+
+  border: 2px solid var(--boblefarvekant);
+  border-radius: 50px;
+
+  backdrop-filter: blur(6px);
+
+  outline: none;
+  margin-top: 20px;
+ 
+
+  }
+  #egetSvar::placeholder { /*ændre farven på" skriv eget svar"*/
+    color: rgb(255, 255, 255);
+
+  }
+
+  #egetSvarBoble {
+  width: 120px;
+  height: 80px;
+
+  border-radius: 50px;
+  border: white;
+
+  background-color: rgba(255, 255, 255, 0.667);
+  color: rgb(255, 255, 255);
+
+  font-family:var(--font);
+  font-size: 1.2em;
+
+  cursor: pointer; /**Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
+
+
+  }
+
