@@ -34,13 +34,24 @@ h1 {
 }
 
 .introTo {
-  font-size: 3em;
+  font-size: 2em;
   max-width: 75%;
   line-height: 1.5em;
 }
 
 .vis {
   opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
+}
+
+.linje {
+  display: block;
+  opacity: 0;
+  transition: opacity 2s ease;
+  margin-bottom: 30px;
+}
+
+.visLinje {
+  opacity: 1;
 }
 
 /*<-----Quiz----->*/

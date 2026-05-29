@@ -9,14 +9,16 @@ async function startWebcam() {
 startWebcam(); //funktionen kører nu
 
 //<----- Intro tekster ----->
-const introTekster = [
-  `Træd tættere på og se dig selv i øjnene`,
-  `Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
-  Hvem ser de? Hvem er du? 
-  Museets kunstnere malede deres inderside. Deres frygt, drømme, tanker og splittelse. 
-  Mange mennekser skjuler tanker om sig selv. 
-  Tanker de tror, de står alene med. 
-  Denne oplevelse handler om dig og din identiet, sårbarhed og hvordan vi ser os selv hvordan andre ser os.`,
+const introTekster = [ 
+  `Træd tættere på og se dig selv i øjnene`, // Vi har fjernet skjul fra teksten, så den er klar til at blive vist. Tilføjet også et html tag (span) med class linje. 
+  `
+ <span class="linje">Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
+  Hvem ser de? Hvem er du?</span> 
+  <span class="linje">Museets kunstnere malede deres inderside. Deres frygt, drømme, tanker og splittelse. 
+  Mange mennekser skjuler tanker om sig selv. </span>
+  <span class="linje">Tanker de tror, de står alene med. 
+  Denne oplevelse handler om dig og din identiet, sårbarhed og hvordan vi ser os selv hvordan andre ser os. </span>
+  `,
 ];
 
 let introStep = 0; // Vi laver en variable der hedder introStep, som starter på 0, så vi kan holde styr på hvilket intro tekst vi er kommet til.
@@ -110,8 +112,18 @@ function visIntro() {
       inaktivTekst.classList.add("introTo"); // så tilføjer vi classen introTo
     }
 
-    inaktivTekst.textContent = introTekster[introStep]; // Her ændrer vi teksten i vores html element til den nuværende introtekst.
+    inaktivTekst.innerHTML = introTekster[introStep]; // Tag teksten fra arrayet introTekster på den plads vi er kommet. (introStep) og indsæt den ind i html elementet inaktivTekst.
     inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
+    const linjer = document.querySelectorAll(".linje");
+    setTimeout(() => {
+      linjer[0].classList.add("visLinje");
+    }, 1000);
+    setTimeout(() => {
+      linjer[1].classList.add("visLinje");
+    }, 4000);
+    setTimeout(() => {
+      linjer[2].classList.add("visLinje");
+    }, 7000);
   }, 2000);
 }
 
