@@ -274,8 +274,25 @@ function visWordcloud() {
 
   // vis ord
 
-  for (let ord in count) {
-    // For hvert ord i vores const count.
+  let ordArray = []; // her laver vi et array, hvor vi vil gemme ordene i
+  for (let ord in count) { // For hvert ord i vores const count.
+    ordArray.push({ tekst: ord, antal: count[ord]}); /*den pusher hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal  */
+  }
+  ordArray.sort((a, b) => b.antal - a.antal); /* Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0] */
+
+  if (ordArray.length === 0) return; /* Hvis listen er tom, så gør vi ikke noget */
+
+  const maxAntal = ordArray[0].antal; /* Her gemmer vi det ord med den højeste optælling, som vi med sort har fået til at være ordArray[0].antal */
+  let centreretArray = []; /*Vi vil gerne have lagt vores højeste ord i midten af listen, så vi laver et nyt tomt array til det */
+
+  ordArray.forEach((ordObj, index) => { /* Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) */
+    if (index % 2 === 0) { /* Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray */
+      centreretArray.push(ordObj); /* hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord */
+    } else {
+      centreretArray.unshift(ordObj); /*hvis tallet derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray */
+    }
+  });
+
     const span = document.createElement("span"); // For hvert ord opretter vi et span element.
     span.classList.add("word"); // Som vi tilføjes word.
     span.textContent = ord + " "; // Teksten inde i span element, bliver til selve ordet og der tilføjet et mellemrum med " ", så der er space mellem svarene.
