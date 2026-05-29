@@ -4,7 +4,7 @@
   --tekst: #ffffff;
   --font: georgia, serif;
   --boblefarvekant: rgba(255, 255, 255, 0.6);
-  --boblebaggrund:rgba(255, 255, 255, 0.2);
+  --boblebaggrund: rgba(255, 255, 255, 0.2);
 }
 
 /*<-----Body----->*/
@@ -70,8 +70,6 @@ h1 {
   transition: opacity 1s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
   font-size: 3em;
 }
-
-
 
 /*<-----Svarmuligheder Bobler----->*/
 
@@ -225,11 +223,9 @@ video#webcam {
   background-color: transparent; /*Gør at knappen bliver gennemsigtigt*/
 }
 
+/* - inputsfelt */
 
-  /* - inputsfelt */
-
-  #egetSvar {
-  
+#egetSvar {
   width: 350px;
   height: 80px;
 
@@ -237,9 +233,8 @@ video#webcam {
   font-size: 1.5em;
   text-align: center;
 
-  background-color:var(--boblebaggrund);
+  background-color: var(--boblebaggrund);
   color: #000000; /*Denne ændre farven på skrivende tekst i "skriv dit eget svar"*/
-
 
   border: 2px solid var(--boblefarvekant);
   border-radius: 50px;
@@ -248,15 +243,13 @@ video#webcam {
 
   outline: none;
   margin-top: 20px;
- 
+}
+#egetSvar::placeholder {
+  /*ændre farven på" skriv eget svar"*/
+  color: rgb(255, 255, 255);
+}
 
-  }
-  #egetSvar::placeholder { /*ændre farven på" skriv eget svar"*/
-    color: rgb(255, 255, 255);
-
-  }
-
-  #egetSvarBoble {
+#egetSvarBoble {
   width: 120px;
   height: 80px;
 
@@ -266,26 +259,56 @@ video#webcam {
   background-color: rgba(255, 255, 255, 0.667);
   color: rgb(255, 255, 255);
 
-  font-family:var(--font);
+  font-family: var(--font);
   font-size: 1.2em;
 
   cursor: pointer; /**Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
+}
 
+.inputContainer {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
 
-  }
+.visInput {
+  opacity: 1;
+}
 
-  .inputContainer {
-    position: fixed; 
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    opacity: 0;
-    transition: opacity 2s ease; 
-  }
+/*<-----Wordcloud----->*/
+/*den container som indeholder wordclouden, både titel og indhold*/
+.wordcloud {
+  display: none; /*skjuler wordclouden indtil vi gør den synlig med vores javascript*/
+  width: 100%; /*bredden på wordclouden*/
+  max-width: 80%; /*den maksimale bredde wordclouden kan blive, så den kan kun blive 80% af skærmen*/
+}
 
-  .visInput{
-    opacity: 1; 
-  }
+.wordcloud h2 {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+/*Den container som indeholder ordene i wordclouden*/
+.wordcloudContainer {
+  display: flex;
+  flex-wrap: wrap; /*så ordene flytter sig til næste linje hvis der ikke er plads i containeren*/
+  justify-content: center; /* ordene bliver centeret vandret*/
+  align-items: center; /*centerer ordene lodret*/
+  align-content: center; /*Centerer indholdet i containeren*/
+  padding: 30px;
+  min-height: 450px;
+}
+
+/*styling af selve ordene i wordclouden*/
+.word {
+  display: inline-block; /*gør at ordene kan stå ved siden af hinanden, men de opføre sig også blok elementer */
+  line-height: 1;
+  font-weight: 900; /*Gør teksten federe*/
+  text-transform: uppercase; /*blokbogstaver*/
+}
