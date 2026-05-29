@@ -84,7 +84,7 @@ const inaktivTekst = document.getElementById("inaktivTekst");
 const quiz = document.querySelector(".quiz");
 const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
 const svarBobler = document.getElementById("svarBobler");
-const inputContainer = document.querySelector(".inputContainer"); 
+const inputContainer = document.querySelector(".inputContainer");
 const egetSvar = document.getElementById("egetSvar");
 const egetSvarBoble = document.getElementById("egetSvarBoble");
 const wordcloudContainer = document.getElementById("wordcloudContainerId");
@@ -168,7 +168,7 @@ function visSpoergsmaal() {
   const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
   svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
   svarBobler.style.opacity = 0; // Boblerne bliver usynligt
-  inputContainer.classList.remove("visInput"); 
+  inputContainer.classList.remove("visInput");
   egetSvar.value = ""; // Her sker det samme, bare med svarinput.
   spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
 
@@ -275,31 +275,76 @@ function visWordcloud() {
   // vis ord
 
   let ordArray = []; // her laver vi et array, hvor vi vil gemme ordene i
-  for (let ord in count) { // For hvert ord i vores const count.
-    ordArray.push({ tekst: ord, antal: count[ord]}); /*den pusher hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal  */
+  for (let ord in count) {
+    // For hvert ord i vores const count.
+    ordArray.push({
+      tekst: ord,
+      antal: count[ord],
+    }); /*den pusher hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal  */
   }
-  ordArray.sort((a, b) => b.antal - a.antal); /* Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0] */
+  ordArray.sort(
+    (a, b) => b.antal - a.antal
+  ); /* Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0] */
 
-  if (ordArray.length === 0) return; /* Hvis listen er tom, så gør vi ikke noget */
+  if (ordArray.length === 0)
+    return; /* Hvis listen er tom, så gør vi ikke noget */
 
-  const maxAntal = ordArray[0].antal; /* Her gemmer vi det ord med den højeste optælling, som vi med sort har fået til at være ordArray[0].antal */
-  let centreretArray = []; /*Vi vil gerne have lagt vores højeste ord i midten af listen, så vi laver et nyt tomt array til det */
+  const maxAntal =
+    ordArray[0]
+      .antal; /* Her gemmer vi det ord med den højeste optælling, som vi med sort har fået til at være ordArray[0].antal */
+  let centreretArray =
+    []; /*Vi vil gerne have lagt vores højeste ord i midten af listen, så vi laver et nyt tomt array til det */
 
-  ordArray.forEach((ordObj, index) => { /* Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) */
-    if (index % 2 === 0) { /* Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray */
-      centreretArray.push(ordObj); /* hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord */
+  ordArray.forEach((ordObj, index) => {
+    /* Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) */
+    if (index % 2 === 0) {
+      /* Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray */
+      centreretArray.push(
+        ordObj
+      ); /* hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord */
     } else {
-      centreretArray.unshift(ordObj); /*hvis tallet derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray */
+      centreretArray.unshift(
+        ordObj
+      ); /*hvis tallet derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray */
     }
   });
 
+  const farvePalet = [
+    //brug de farver fra powerpoint
+    "#FA9D00",
+    "#595959",
+    "#301F15",
+    "#B58054",
+    "#1B4B81",
+    "#E14000",
+    "#E8272E",
+    "#87BA05",
+  ]; /* Her har vi lavet en farvepalet, som er et array med de farver vi gerne vil bruge i vores wordcloud. */
+  centreretArray.forEach((ordObj) => {
+    //Her bygger vi selve wordclouden ved at lave et loop i det centreret array.
     const span = document.createElement("span"); // For hvert ord opretter vi et span element.
-    span.classList.add("word"); // Som vi tilføjes word.
-    span.textContent = ord + " "; // Teksten inde i span element, bliver til selve ordet og der tilføjet et mellemrum med " ", så der er space mellem svarene.
-    const størrelse = 16 + count[ord] * 12; // Her bestemmer vi størrelsen på ordet. Jo flere gange det optræder, jo større bliver det.
-    span.style.fontSize = størrelse + "px"; // Her sætter vi størrelsen på ordet ved at bruge style.fontSize og tilføje "px" for at gøre det til pixels.
-    wordcloudContainer.appendChild(span); // Her tilføjes det nye span element til wordcloud containeren, så det vises på siden.
-  }
+    span.classList.add("word"); // Her vi tilføjer vi word.
+    span.textContent = ordObj.tekst; // Teksten inde i span element, bliver nu til selve ordet.
+
+    const minSize = 20; // Her har vi sat en minimum størrelse på 20 pixels, så selv de ord der kun er nævnt en gang, stadig er synlige i wordclouden.
+    const maxSize = 95; // Her har vi sat en maksimum størrelse på 95 pixels, så de ord der er nævnt rigtig mange gange ikke bliver alt for store og dominerende i wordclouden.
+
+    let storrelse = minSize; // Her laver vi en variabel til størrelsen, som starter på minimum størrelsen.
+    if (maxAntal > 1) {
+      // Her tjekker vi om det højeste antal er større end 1, fordi hvis der kun er 1, så vil alle ord have samme størrelse.
+      storrelse =
+        minSize + ((ordObj.antal - 1) / (maxAntal - 1)) * (maxSize - minSize); // Linjen beregner størrelsen ud fra hvor stort et antal et ord er sammenlignet med de andre ord.
+    } else {
+      storrelse = 35;
+    }
+    span.style.fontSize = storrelse + "px"; // Her sætter vi font størrelsen på span elementet til den størrelse vi har regnet ud, og tilføjer "px" for at gøre det til pixels.
+    const tilfaeldigFarve =
+      farvePalet[Math.floor(Math.random() * farvePalet.length)]; // Denne linje vælger en tilfældig farve fra arrayet farvePalet.
+    span.style.color = tilfaeldigFarve; //Denne linje ændrer så tekstfarven.
+
+    span.style.margin = "6px 12px"; //Her tilføjer vi afstad uden om hvert ord, så de ikke klumper sig sammen.
+    wordcloudContainer.appendChild(span); // Her tilføjes et HTML-element på siden, så det bliver vist på hjemmesiden.
+  });
 }
 
 resetKnap.addEventListener("click", () => {
