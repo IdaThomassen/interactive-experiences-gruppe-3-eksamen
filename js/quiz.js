@@ -84,6 +84,7 @@ const inaktivTekst = document.getElementById("inaktivTekst");
 const quiz = document.querySelector(".quiz");
 const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
 const svarBobler = document.getElementById("svarBobler");
+const inputContainer = document.querySelector(".inputContainer"); 
 const egetSvar = document.getElementById("egetSvar");
 const egetSvarBoble = document.getElementById("egetSvarBoble");
 const wordcloudContainer = document.getElementById("wordcloudContainerId");
@@ -167,6 +168,7 @@ function visSpoergsmaal() {
   const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
   svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
   svarBobler.style.opacity = 0; // Boblerne bliver usynligt
+  inputContainer.classList.remove("visInput"); 
   egetSvar.value = ""; // Her sker det samme, bare med svarinput.
   spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
 
@@ -192,6 +194,7 @@ function visSpoergsmaal() {
       svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
     });
     svarBobler.style.opacity = 1; // Boblerne bliver helt synlig
+    inputContainer.classList.add("visInput");
   }, 2000); //Her sætter vi tiden til 2 sekunder.
 }
 
