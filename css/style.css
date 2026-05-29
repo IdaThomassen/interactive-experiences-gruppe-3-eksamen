@@ -66,6 +66,88 @@ h1 {
   color: white; /* Farven på spørgsmålet bliver hvide */
   opacity: 0; /*Denne gør teksten usynlig*/
   transition: opacity 1s; /* Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
+  font-size: 3em;
+}
+
+/*<-----Svarmuligheder Bobler----->*/
+
+/*Her er den overordnet stil for boblerne*/
+#svarBobler {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  margin-top: 20px;
+}
+
+/*Boblerne*/
+#svarBobler button {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+
+  font-family: var(--font);
+  font-size: 1.8em;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px color(srgb 0, 0, 0, 0.2);
+
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/*Placering af alle boblerne*/
+/*Ensomhed/Dum/Mit grin*/
+#svarBobler button:nth-child(1) {
+  top: -10%;
+  left: -30%;
+}
+
+/*Alle mine fejl/Grim/Mine hænder*/
+#svarBobler button:nth-child(2) {
+  top: 50%;
+  left: -40%;
+}
+
+/*Mit smil/Sød/At blive misforstået*/
+#svarBobler button:nth-child(3) {
+  top: 35%;
+  left: -10%;
+}
+
+/*Mine øjne/Skør/Ikke klog nok*/
+#svarBobler button:nth-child(4) {
+  top: 0%;
+  left: 75%;
+}
+
+/*En taber/Underlig/Ikke god nok*/
+#svarBobler button:nth-child(5) {
+  top: -30%;
+  left: 110%;
+}
+
+/*Min hårfarve/Snaksaglig/Min krop*/
+#svarBobler button:nth-child(6) {
+  top: 30%;
+  left: 115%;
+}
+
+/*Min næse/Venlig/For stille*/
+#svarBobler button:nth-child(7) {
+  top: 60%;
+  left: 80%;
 }
 
 video#webcam {
