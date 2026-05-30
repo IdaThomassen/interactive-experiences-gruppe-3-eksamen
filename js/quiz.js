@@ -1,27 +1,88 @@
 "use strict";
 
-//<----- Webcam spejl ----->
-async function startWebcam() {
-  //venter adgang til kameraet
-  const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
-  document.getElementById("webcam").srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
-}
-startWebcam(); //funktionen kører nu
+//--------Dom referencer--------------------------------------------------------
 
-//<----- Intro tekster ----->
-const introTekster = [
-  `Træd tættere på og se dig selv i øjnene`, // Vi har fjernet skjul fra teksten, så den er klar til at blive vist. Tilføjet også et html tag (span) med class linje.
-  `
- <span class="linje">Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
-  Hvem ser de? Hvem er du?</span> 
-  <span class="linje">Museets kunstnere malede deres inderside. Deres frygt, drømme, tanker og splittelse. 
-  Mange mennekser skjuler tanker om sig selv. </span>
-  <span class="linje">Tanker de tror, de står alene med. 
-  Denne oplevelse handler om dig og din identiet, sårbarhed og hvordan vi ser os selv hvordan andre ser os. </span>
-  `,
-];
+    //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
+        const inaktivTekst = document.getElementById("inaktivTekst");
+        const quiz = document.querySelector(".quiz");
+        const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
+        const svarBobler = document.getElementById("svarBobler");
+        const inputContainer = document.querySelector(".inputContainer");
+        const egetSvar = document.getElementById("egetSvar");
+        const egetSvarBoble = document.getElementById("egetSvarBoble");
+        const wordcloudContainer = document.getElementById("wordcloudContainerId");
+        const wordcloudId = document.getElementById("wordcloudId");
+        const resetKnap = document.getElementById("resetKnapId");
 
-let introStep = 0; // Vi laver en variable der hedder introStep, som starter på 0, så vi kan holde styr på hvilket intro tekst vi er kommet til.
+
+//--------Webcam spejl--------------------------------------------------------
+
+    //<----- funktion for start webcam ----->
+        async function startWebcam() {
+        //venter adgang til kameraet
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
+        document.getElementById("webcam").srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
+        }
+        startWebcam(); //funktionen kører nu
+
+
+//--------Intro--------------------------------------------------------    
+
+    //<----- Array med intro tekster ----->
+        const introTekster = [
+        `Træd tættere på og se dig selv i øjnene`, // Vi har fjernet skjul fra teksten, så den er klar til at blive vist. Tilføjet også et html tag (span) med class linje.
+        
+        `<span class="linje">Kig op, portrætterne omkring dig stirrer, alle øjne kigger på dig. 
+        Hvem ser de? Hvem er du?</span> 
+        <span class="linje">Museets kunstnere malede deres inderside. Deres frygt, drømme, tanker og splittelse. 
+        Mange mennekser skjuler tanker om sig selv. </span>
+        <span class="linje">Tanker de tror, de står alene med. 
+        Denne oplevelse handler om dig og din identiet, sårbarhed og hvordan vi ser os selv hvordan andre ser os. </span>
+        `,
+        ];
+
+
+    //<----- Status og variabler ----->  
+        let introStep = 0; // Vi laver en variable der hedder introStep, som starter på 0, så vi kan holde styr på hvilket intro tekst vi er kommet til.
+
+
+    //<----- Intro funktion ----->
+
+        //Vi skal lave en funktion som viser vores introtekster, denne funktion kalder vi for visIntro()
+            function visIntro() {
+                inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
+
+                setTimeout(() => {
+                //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
+
+                //Vi vil have lavet sådan at hver af de to intro tekster for hver deres class navn, så vi kan style dem forskeligt inde i css.
+                inaktivTekst.classList.remove("introEt", "introTo"); //Derfor sørger vi for at fjerne de to class navne, så vi ikke risikere at den ikke med at have begge på en gang.
+
+                if (introStep === 0) {
+                    // denne sætning siger at hvis introStep er lige med 0 både datatypen og værdien (0 er index tallet)
+                    inaktivTekst.classList.add("introEt"); // så tilføjer vi classen introEt
+                }
+
+                if (introStep === 1) {
+                    //hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
+                    inaktivTekst.classList.add("introTo"); // så tilføjer vi classen introTo
+                }
+
+                inaktivTekst.innerHTML = introTekster[introStep]; // Tag teksten fra arrayet introTekster på den plads vi er kommet. (introStep) og indsæt den ind i html elementet inaktivTekst.
+                inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
+                const linjer = document.querySelectorAll(".linje");
+                setTimeout(() => {
+                    linjer[0].classList.add("visLinje");
+                }, 1000);
+                setTimeout(() => {
+                    linjer[1].classList.add("visLinje");
+                }, 4000);
+                setTimeout(() => {
+                    linjer[2].classList.add("visLinje");
+                }, 7000);
+                }, 2000);
+            }
+
 
 //<----- Array med spørgsmål ----->
 //Her har vi spørgsmål til vores quiz og svarmuligheder. Det er et array med objekter, hvert objekt er et spørgsmål. Hvert spørgsmål har en id, en tekst og et array med svarmuligheder.
@@ -77,56 +138,9 @@ let nuvaerendeSpoergsmaal = 0;
 //Her har vi lavet et tomt objekt, som vi bruger til at samle de svar vi for fra de besøgende.
 const brugerSvar = {};
 
-//<----- HTML elementer ----->
 
-//For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
-const inaktivTekst = document.getElementById("inaktivTekst");
-const quiz = document.querySelector(".quiz");
-const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
-const svarBobler = document.getElementById("svarBobler");
-const inputContainer = document.querySelector(".inputContainer");
-const egetSvar = document.getElementById("egetSvar");
-const egetSvarBoble = document.getElementById("egetSvarBoble");
-const wordcloudContainer = document.getElementById("wordcloudContainerId");
-const wordcloudId = document.getElementById("wordcloudId");
-const resetKnap = document.getElementById("resetKnapId");
 
-//<----- Intro funktion ----->
 
-//Vi skal lave en funktion som viser vores introtekster, denne funktion kalder vi for visIntro()
-function visIntro() {
-  inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
-
-  setTimeout(() => {
-    //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
-
-    //Vi vil have lavet sådan at hver af de to intro tekster for hver deres class navn, så vi kan style dem forskeligt inde i css.
-    inaktivTekst.classList.remove("introEt", "introTo"); //Derfor sørger vi for at fjerne de to class navne, så vi ikke risikere at den ikke med at have begge på en gang.
-
-    if (introStep === 0) {
-      // denne sætning siger at hvis introStep er lige med 0 både datatypen og værdien (0 er index tallet)
-      inaktivTekst.classList.add("introEt"); // så tilføjer vi classen introEt
-    }
-
-    if (introStep === 1) {
-      //hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
-      inaktivTekst.classList.add("introTo"); // så tilføjer vi classen introTo
-    }
-
-    inaktivTekst.innerHTML = introTekster[introStep]; // Tag teksten fra arrayet introTekster på den plads vi er kommet. (introStep) og indsæt den ind i html elementet inaktivTekst.
-    inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
-    const linjer = document.querySelectorAll(".linje");
-    setTimeout(() => {
-      linjer[0].classList.add("visLinje");
-    }, 1000);
-    setTimeout(() => {
-      linjer[1].classList.add("visLinje");
-    }, 4000);
-    setTimeout(() => {
-      linjer[2].classList.add("visLinje");
-    }, 7000);
-  }, 2000);
-}
 
 //<----- Flow ----->
 
