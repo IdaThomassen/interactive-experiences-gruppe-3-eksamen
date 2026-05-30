@@ -338,68 +338,68 @@
                 });
         }
 
+        //<-----reset knap----->
+            resetKnap.addEventListener("click", () => {
+            localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
+            visWordcloud();
+            });
 
-        
+
+
 //--------Flow--------------------------------------------------------  
 
-//Man skal klikke sig igennem flowet
+    //<-----flowet----->
+        //Man skal klikke sig igennem flowet
 
-document.body.addEventListener("click", startFlow); //Her har vi tilføjet en event listener til hele body element, hvor vi har sagt den skal lytte efter et click og derefter affyre funktionen startFlow.
+        document.body.addEventListener("click", startFlow); //Her har vi tilføjet en event listener til hele body element, hvor vi har sagt den skal lytte efter et click og derefter affyre funktionen startFlow.
 
-function startFlow(event) {
-  // Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på.
-  if (
-    event.target.tagName === "BUTTON" || // hvis der bliver klikket på en knap
-    event.target.tagName === "INPUT" // hvis der bliver klikket på et input felt
-  ) {
-    return; // Hvis der bliver klikket på en knap eller et input felt, så stopper vi funktionen her.
-  }
+        function startFlow(event) {
+            // Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på.
+            if (
+                event.target.tagName === "BUTTON" || // hvis der bliver klikket på en knap
+                event.target.tagName === "INPUT" // hvis der bliver klikket på et input felt
+            ) {
+                return; // Hvis der bliver klikket på en knap eller et input felt, så stopper vi funktionen her.
+            }
 
-  if (introStep < introTekster.length - 1) {
-    // hvis introStep er mindre end længden af introTekster, så
-    introStep++; // så øger vi introStep med 1, så vi kommer til næste introtekst.
-    visIntro(); // denne viser den næste introtekst.
-  } else if (
-    // Hvis vi er kommet til den sidste introtekst, så starter quizzen.
-    introStep ===
-    introTekster.length - 1 // Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1.
-  ) {
-    inaktivTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
-    setTimeout(() => {
-      // Efter 2,5 sekunder (2500 ms), så sker følgende:
-      inaktivTekst.style.display = "none"; // Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none".
-      quiz.style.display = "block"; // Her får vi quiz elementet til at dukke op ved at sætte display til "block".
-      visSpoergsmaal(); // Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter.
-    }, 2500); // Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder.
-    introStep++;
-  }
-}
+            if (introStep < introTekster.length - 1) {
+                // hvis introStep er mindre end længden af introTekster, så
+                introStep++; // så øger vi introStep med 1, så vi kommer til næste introtekst.
+                visIntro(); // denne viser den næste introtekst.
+            } else if (
+                // Hvis vi er kommet til den sidste introtekst, så starter quizzen.
+                introStep ===
+                introTekster.length - 1 // Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1.
+            ) {
+                inaktivTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder.
+                setTimeout(() => {
+                // Efter 2,5 sekunder (2500 ms), så sker følgende:
+                inaktivTekst.style.display = "none"; // Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none".
+                quiz.style.display = "block"; // Her får vi quiz elementet til at dukke op ved at sætte display til "block".
+                visSpoergsmaal(); // Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter.
+                }, 2500); // Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder.
+                introStep++;
+            }
+        }
 
+    //<-----Restart flow----->
+        // Dette er en funktion der først går i gang, når man trykker på knappen.
+        function restartFlow() {
+            nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstillede og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0.
+            introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten.
+            wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none".
+            inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block".
+            inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
+            inaktivTekst.classList.add("vis"); //Tilføjer css clssen "vis" til inaktivTekst, så den bliver synlig igen.
+            quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none".
+        }
 
+        restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra.
 
+    
 
-
-resetKnap.addEventListener("click", () => {
-  localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
-  visWordcloud();
-});
-
+//----------------------------------------------------------------  
 inaktivTekst.classList.add("vis");
 
 // visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
 // visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind.
-
-//<----- Restart flowet ----->
-
-// Dette er en funktion der først går i gang, når man trykker på knappen.
-function restartFlow() {
-  nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstillede og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0.
-  introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten.
-  wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none".
-  inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block".
-  inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
-  inaktivTekst.classList.add("vis"); //Tilføjer css clssen "vis" til inaktivTekst, så den bliver synlig igen.
-  quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none".
-}
-
-restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra.
