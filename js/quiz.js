@@ -15,6 +15,8 @@
         const resetKnap = document.getElementById("resetKnapId");
 
 
+
+
 //--------Webcam spejl--------------------------------------------------------
 
     //<----- funktion for start webcam ----->
@@ -24,6 +26,8 @@
         document.getElementById("webcam").srcObject = stream; // Vi henter html elementet id "webcam" og videotagget bliver vist live.
         }
         startWebcam(); //funktionen kører nu
+
+
 
 
 //--------Intro--------------------------------------------------------    
@@ -85,6 +89,7 @@
 
 
 
+
 //--------Quiz - spørgsmål og svarmuligheder--------------------------------------------------------  
 
     //<----- Array med spørgsmål ----->
@@ -133,12 +138,15 @@
         },
         ];
 
+
+
     //<----- Status og variabler ----->
         //Her har vi lavet en variable med værdien 0, så vi kan holde styr på hvilket vi er kommet til. Vi bruger let fordi at vi ved at værdien vil ændre sig.
         let nuvaerendeSpoergsmaal = 0;
 
         //Her har vi lavet et tomt objekt, som vi bruger til at samle de svar vi for fra de besøgende.
         const brugerSvar = {};
+
 
 
     //<----- Funktion der skal vise spørgsmål og svarmuligheder ----->
@@ -215,6 +223,8 @@
             }
         }
 
+
+
     //<----- Eget svar - Event listener på send knap ----->
         //Vi vil gerne have lavet det sådan at eget svar bliver gemt
         egetSvarBoble.addEventListener("click", () => { //Når egetSvarBoble (send knappen) klikkes på sker der:
@@ -228,7 +238,109 @@
         });
 
 
-//<----- Flow ----->
+
+
+//--------Wordcloud-------------------------------------------------------- 
+
+    //<----- Wordcloud funktionen ----->
+        //Her laver vi så at wordclouden fungere. For hver gang et ord gentages forstørres det. Det ord der er svaret flest gange i midten af ordskyen
+
+        function visWordcloud() {
+            const svar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; //Her henter vi svarene fra local storage, hvor den leder efter "wordcloudSvar". Hvis der ikke er noget i local storage, så starter den med et tomt array.
+
+            wordcloudContainer.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
+
+            //-----Optællingsdelen i funktionen-----
+                // I vores wordcloud, jo flere gange et ord bliver gentaget, jo større bliver ordet i wordcloud.
+                const count = {}; // Vi laver et tomt objekt, hvor vi gemmer det i variablen (count)
+
+                for (let ord of svar) { // Vi laver et loop, hvor for hvert ord der er i listen svar, bliver det ord lagt over i let ord variablen.
+
+                    ord = ord.trim().toLowerCase(); // Ordet bliver trimmet og sat til lowercase, så alle ord bliver ensartet format.
+
+                    if (count[ord]) { // Her tjekker den , hvor mange gange et ord optræder på listen.
+                        count[ord]++; //Hvis ordet findes lægger der 1 til værdien. Jo flere gange den optræder, jo højere er optællingen.
+                    } 
+                    else {
+                        count[ord] = 1; // hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
+                    }
+                }
+
+
+            //-----Sortering af ordenes optælling i funktionen i funktionen-----
+                //den optælling vil vi gerne have gemt i et nyt array, som vi skal bruge til at sortere ordene efter optælling 
+                let ordArray = []; // her laver vi et array, hvor vi vil gemme ordene i
+
+                for (let ord in count) { // For hvert ord i vores const count.
+                    ordArray.push({tekst: ord, antal: count[ord],}); // pusher den hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal 
+                }
+
+                ordArray.sort((a, b) => b.antal - a.antal); // Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0]
+
+                if (ordArray.length === 0) return; // Hvis listen er tom, så gør vi ikke noget
+
+                const maxAntal = ordArray[0].antal; // Her gemmer vi det ord med den højeste optælling i en const maxAntal, som vi med .sort har fået til at være ordArray[0].antal 
+                let centreretArray =[]; //Vi vil gerne have lagt vores højeste ord i midten af listen, så vi laver et nyt tomt array til det 
+
+
+            //-----Centering af ordene i ordArray i funktionen-----
+                ordArray.forEach((ordObj, index) => {
+                    // Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) 
+                    if (index % 2 === 0) { // Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray 
+                        centreretArray.push(ordObj); // hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord 
+                    } 
+
+                    else {
+                        centreretArray.unshift(ordObj); //hvis tallet ikke er lige = derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray 
+                    }
+                });
+
+
+            //-----Udseendet af wordcloud ordene i funktionen-----
+                const farvePalet = [
+                    //Museum Ovartacis farver
+                    "#FA9D00",
+                    "#595959",
+                    "#301F15",
+                    "#B58054",
+                    "#1B4B81",
+                    "#E14000",
+                    "#E8272E",
+                    "#87BA05",
+                ]; /* Her har vi lavet en farvepalet, som er et array med de farver vi gerne vil bruge i vores wordcloud. */
+
+
+                centreretArray.forEach((ordObj) => { //Her bygger vi selve wordclouden ved at lave et loop i det centreret array.
+
+                    const span = document.createElement("span"); // For hvert ord opretter vi et span element.
+                    span.classList.add("word"); // Her vi tilføjer vi classen word til span.
+                    span.textContent = ordObj.tekst; // Teksten inde i span element, bliver nu til selve ordet.
+
+                    const minSize = 20; // Her har vi sat en minimum størrelse på 20 pixels, så selv de ord der kun er nævnt en gang, stadig er synlige i wordclouden.
+                    const maxSize = 95; // Her har vi sat en maksimum størrelse på 95 pixels, så de ord der er nævnt rigtig mange gange ikke bliver alt for store og dominerende i wordclouden.
+
+                    let storrelse = minSize; // Her laver vi en variabel til størrelsen, som starter på minimum størrelsen.
+                    if (maxAntal > 1) {
+                        // Her tjekker vi om det højeste antal er større end 1, fordi hvis der kun er 1, så vil alle ord have samme størrelse.
+                        storrelse = minSize + ((ordObj.antal - 1) / (maxAntal - 1)) * (maxSize - minSize); // Linjen beregner størrelsen ud fra hvor stort et antal et ord er sammenlignet med de andre ord.
+                    } 
+                    else {
+                        storrelse = 35;
+                    }
+
+                    span.style.fontSize = storrelse + "px"; // Her sætter vi font størrelsen på span elementet til den størrelse vi har regnet ud, og tilføjer "px" for at gøre det til pixels.
+                    const tilfaeldigFarve = farvePalet[Math.floor(Math.random() * farvePalet.length)]; // Denne linje vælger en tilfældig farve fra arrayet farvePalet.
+                    span.style.color = tilfaeldigFarve; //Denne linje ændrer så tekstfarven.
+
+                    span.style.margin = "6px 12px"; //Her tilføjer vi afstad uden om hvert ord, så de ikke klumper sig sammen.
+
+                    wordcloudContainer.appendChild(span); // Her tilføjes et HTML-element på siden, så det bliver vist på siden.
+                });
+        }
+
+
+        
+//--------Flow--------------------------------------------------------  
 
 //Man skal klikke sig igennem flowet
 
@@ -266,104 +378,6 @@ function startFlow(event) {
 
 
 
-//<----- Wordcloud funktionen ----->
-//Her laver vi så at wordclouden fungere
-
-function visWordcloud() {
-  const svar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; //Her henter vi svarene fra local storage, hvor den leder efter "wordcloudSvar". Hvis der ikke er noget i local storage, så starter den med et tomt array.
-
-  wordcloudContainer.innerHTML = " "; //Vi tømmer wordcloud containeren for at gøre klar til at vise de nye svar.
-
-  // I vores wordcloud, jo flere gange et ord bliver gentaget, jo større bliver ordet i wordcloud.
-  const count = {}; // Vi laver et tomt objekt, hvor vi gemmer det i variablen (count)
-
-  for (let ord of svar) {
-    // Vi laver et loop, hvor for hvert ord der er i listens, bliver det ord lagt over i let ord variablen.
-
-    ord = ord.trim().toLowerCase(); // Ordet bliver trimmet og sat til lowercase, så alle ord bliver ensartet format.
-
-    if (count[ord]) {
-      // Her tjekker den , hvor mange gange et ord optræder på listen.
-      count[ord]++; //Hvis ordet findes lægger den 1 point til, hvis ikke det findes for det 1 point. Jo flere gange den optræder , jo flere point får den.
-    } else {
-      count[ord] = 1; // hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
-    }
-  }
-
-  // vis ord
-
-  let ordArray = []; // her laver vi et array, hvor vi vil gemme ordene i
-  for (let ord in count) {
-    // For hvert ord i vores const count.
-    ordArray.push({
-      tekst: ord,
-      antal: count[ord],
-    }); /*den pusher hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal  */
-  }
-  ordArray.sort(
-    (a, b) => b.antal - a.antal
-  ); /* Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0] */
-
-  if (ordArray.length === 0)
-    return; /* Hvis listen er tom, så gør vi ikke noget */
-
-  const maxAntal =
-    ordArray[0]
-      .antal; /* Her gemmer vi det ord med den højeste optælling, som vi med sort har fået til at være ordArray[0].antal */
-  let centreretArray =
-    []; /*Vi vil gerne have lagt vores højeste ord i midten af listen, så vi laver et nyt tomt array til det */
-
-  ordArray.forEach((ordObj, index) => {
-    /* Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) */
-    if (index % 2 === 0) {
-      /* Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray */
-      centreretArray.push(
-        ordObj
-      ); /* hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord */
-    } else {
-      centreretArray.unshift(
-        ordObj
-      ); /*hvis tallet derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray */
-    }
-  });
-
-  const farvePalet = [
-    //brug de farver fra powerpoint
-    "#FA9D00",
-    "#595959",
-    "#301F15",
-    "#B58054",
-    "#1B4B81",
-    "#E14000",
-    "#E8272E",
-    "#87BA05",
-  ]; /* Her har vi lavet en farvepalet, som er et array med de farver vi gerne vil bruge i vores wordcloud. */
-  centreretArray.forEach((ordObj) => {
-    //Her bygger vi selve wordclouden ved at lave et loop i det centreret array.
-    const span = document.createElement("span"); // For hvert ord opretter vi et span element.
-    span.classList.add("word"); // Her vi tilføjer vi word.
-    span.textContent = ordObj.tekst; // Teksten inde i span element, bliver nu til selve ordet.
-
-    const minSize = 20; // Her har vi sat en minimum størrelse på 20 pixels, så selv de ord der kun er nævnt en gang, stadig er synlige i wordclouden.
-    const maxSize = 95; // Her har vi sat en maksimum størrelse på 95 pixels, så de ord der er nævnt rigtig mange gange ikke bliver alt for store og dominerende i wordclouden.
-
-    let storrelse = minSize; // Her laver vi en variabel til størrelsen, som starter på minimum størrelsen.
-    if (maxAntal > 1) {
-      // Her tjekker vi om det højeste antal er større end 1, fordi hvis der kun er 1, så vil alle ord have samme størrelse.
-      storrelse =
-        minSize + ((ordObj.antal - 1) / (maxAntal - 1)) * (maxSize - minSize); // Linjen beregner størrelsen ud fra hvor stort et antal et ord er sammenlignet med de andre ord.
-    } else {
-      storrelse = 35;
-    }
-    span.style.fontSize = storrelse + "px"; // Her sætter vi font størrelsen på span elementet til den størrelse vi har regnet ud, og tilføjer "px" for at gøre det til pixels.
-    const tilfaeldigFarve =
-      farvePalet[Math.floor(Math.random() * farvePalet.length)]; // Denne linje vælger en tilfældig farve fra arrayet farvePalet.
-    span.style.color = tilfaeldigFarve; //Denne linje ændrer så tekstfarven.
-
-    span.style.margin = "6px 12px"; //Her tilføjer vi afstad uden om hvert ord, så de ikke klumper sig sammen.
-    wordcloudContainer.appendChild(span); // Her tilføjes et HTML-element på siden, så det bliver vist på hjemmesiden.
-  });
-}
 
 resetKnap.addEventListener("click", () => {
   localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
