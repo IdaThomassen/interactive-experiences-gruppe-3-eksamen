@@ -84,62 +84,148 @@
             }
 
 
-//<----- Array med spørgsmål ----->
-//Her har vi spørgsmål til vores quiz og svarmuligheder. Det er et array med objekter, hvert objekt er et spørgsmål. Hvert spørgsmål har en id, en tekst og et array med svarmuligheder.
 
-const spoergsmaal = [
-  {
-    id: 1,
-    spoergsmaalTekst:
-      "Hvad lægger du først mærke til, når du ser dig selv i et spejl?",
-    svarmuligheder: [
-      "Ensomhed",
-      "Alle mine fejl",
-      "Mit smil",
-      "Mine øjne",
-      "En taber",
-      "Min hårfarve",
-      "Mine næse",
-    ],
-  },
-  {
-    id: 2,
-    spoergsmaalTekst:
-      "Hvis andre skulle beskrive dig med ét ord, hvad ville de sige?",
-    svarmuligheder: [
-      "Dum",
-      "Grim",
-      "Sød",
-      "Skør",
-      "Underlig",
-      "Snaksaglig",
-      "Venlig",
-    ],
-  },
-  {
-    id: 3,
-    spoergsmaalTekst: "Hvad er din største usikkerhed?",
-    svarmuligheder: [
-      "Mit grin",
-      "Mine hænder",
-      "At blive misforstået",
-      "Ikke klog nok",
-      "Ikke god nok",
-      "Min krop",
-      "For stille",
-    ],
-  },
-];
+//--------Quiz - spørgsmål og svarmuligheder--------------------------------------------------------  
 
-//<----- Titel ----->
-//Her har vi lavet en variable med værdien 0, så vi kan holde styr på hvilket vi er kommet til. Vi bruger let fordi at vi ved at værdien vil ændre sig.
-let nuvaerendeSpoergsmaal = 0;
+    //<----- Array med spørgsmål ----->
+        //Her har vi spørgsmål til vores quiz og svarmuligheder. Det er et array med objekter, hvert objekt er et spørgsmål. Hvert spørgsmål har en id, en tekst og et array med svarmuligheder.
+        const spoergsmaal = [
+        {
+            id: 1,
+            spoergsmaalTekst:
+            "Hvad lægger du først mærke til, når du ser dig selv i et spejl?",
+            svarmuligheder: [
+            "Ensomhed",
+            "Alle mine fejl",
+            "Mit smil",
+            "Mine øjne",
+            "En taber",
+            "Min hårfarve",
+            "Mine næse",
+            ],
+        },
+        {
+            id: 2,
+            spoergsmaalTekst:
+            "Hvis andre skulle beskrive dig med ét ord, hvad ville de sige?",
+            svarmuligheder: [
+            "Dum",
+            "Grim",
+            "Sød",
+            "Skør",
+            "Underlig",
+            "Snaksaglig",
+            "Venlig",
+            ],
+        },
+        {
+            id: 3,
+            spoergsmaalTekst: "Hvad er din største usikkerhed?",
+            svarmuligheder: [
+            "Mit grin",
+            "Mine hænder",
+            "At blive misforstået",
+            "Ikke klog nok",
+            "Ikke god nok",
+            "Min krop",
+            "For stille",
+            ],
+        },
+        ];
 
-//Her har vi lavet et tomt objekt, som vi bruger til at samle de svar vi for fra de besøgende.
-const brugerSvar = {};
+    //<----- Status og variabler ----->
+        //Her har vi lavet en variable med værdien 0, så vi kan holde styr på hvilket vi er kommet til. Vi bruger let fordi at vi ved at værdien vil ændre sig.
+        let nuvaerendeSpoergsmaal = 0;
+
+        //Her har vi lavet et tomt objekt, som vi bruger til at samle de svar vi for fra de besøgende.
+        const brugerSvar = {};
+
+
+    //<----- Funktion der skal vise spørgsmål og svarmuligheder ----->
+        function visSpoergsmaal() {
+            const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
+            svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
+            svarBobler.style.opacity = 0; // Boblerne bliver usynligt
+            inputContainer.classList.remove("visInput");
+            egetSvar.value = ""; // Her sker det samme, bare med svarinput.
+            spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
+
+            //spørgsmål fader ind
+            setTimeout(() => {
+                // Efter 1 sekund (1000 ms), så sker følgende:
+                spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
+                spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
+            }, 1000); // Her sætter vi tiden til 1 sekund.
+
+            // svar kommer senere
+            setTimeout(() => {
+                // efter 4 sekunder,så sker der følgende
+
+                spoergsmaalData.svarmuligheder.forEach((svar) => {
+                //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
+                const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
+                boble.textContent = svar; // Her indsættes nye svarmuligheder og giver boblen den tekst, som svaret har.
+                boble.addEventListener("click", () => {
+                    gemSvar(spoergsmaalData.id, svar);
+                }); // Nu har vi tilføjet at når man klikker på boblen (knappen) så afyres en funktion der gemmer det svar.
+
+                svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
+                });
+                svarBobler.style.opacity = 1; // Boblerne bliver helt synlig
+                inputContainer.classList.add("visInput");
+            }, 2000); //Her sætter vi tiden til 2 sekunder.
+        }
 
 
 
+    //<----- Funktion til at gemme svar ----->
+        function gemSvar(spoergsmaalId, svar) { //Her opretter vi en funktion gemSvar med parameterne spoergsmaalId, svar
+            svar = svar.trim().toLowerCase(); // Her bliver svaret trimmet og gjort til små bogstaver, for at sørge for at vi får et ensartet format.
+
+            brugerSvar[spoergsmaalId] = svar; // Svaret bliver gemt i brugerSvar efter det er gjort ensartet.
+
+            // I vores løsning vil vi kun gemme svarene til spørgsmål 3 i local storage, derfor laver vi et if statement
+            if (spoergsmaalId === 3) {
+                //Vi tjekker derfor om spoergsmaalId er 3. Det gør vi ved at bruge === som tjekker om både værdien og datatypen er 100% den samme.
+                const gamleSvar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; // gamle svar bliver hentet fra local storage, hvor den leder efter "wordcloudSvar" ved at bruge JSON.parse bliver teksten lavet til javascript data (skriv mere senere).
+
+                gamleSvar.push(svar); // Her pushes det nye svar ind i arrayet af gamle svar.
+                localStorage.setItem("wordcloudSvar", JSON.stringify(gamleSvar)); // Her gemmer vi den opdaterede liste af svar i local storage og bruger .JSON.stringify for at lave arrayet tilbage til en string.
+            }
+
+            //Her kommer næste spørgsmål
+            nuvaerendeSpoergsmaal++; // ++ bruges til at øge værdien af nuvaerendeSpoergsmaal med 1, og dermed gå til næste spørgsmål. Altså hvis vi er ved spørgsmål 1, der bliver der plusset 1 på spørgsmålet og det bliver til 2, og så viser den spørgsmål 2.
+            if (nuvaerendeSpoergsmaal < spoergsmaal.length) {
+                //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet spoergsmaal
+                visSpoergsmaal(); //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
+            } 
+            else {
+                //ellers sker der følgende:
+                quiz.style.display = "none"; //quiz styles så den bliver usynlig
+                wordcloudId.style.display = "block"; //og wordclouden styles til at blive synlig
+                visWordcloud(); // Funktion kaldes på så wordclouden vises med de nye svar.
+
+                // SKAL MÅSKE ÆNDRES
+                // spoergsmaalTekst.textContent = "Tak for vise dit indre"; // Her ændres teksten til en tak for at deltage
+                // svarBobler.innerHTML = ""; //Her tømmer vi indholdet i boblerne
+                // egetSvar.style.display = "none"; //Her får vi inputsfeltet med eget svar til at forvinde
+                // egetSvarBoble.style.display = "none"; //Her får vi knappen til inputsfeltet til at forsvinde
+
+                // console.log(brugerSvar);
+            }
+        }
+
+    //<----- Eget svar - Event listener på send knap ----->
+        //Vi vil gerne have lavet det sådan at eget svar bliver gemt
+        egetSvarBoble.addEventListener("click", () => { //Når egetSvarBoble (send knappen) klikkes på sker der:
+            const tekst = egetSvar.value.trim().toLowerCase(); //Så gemmer vi det der står i inputfeltet i en variable tekst, og der bliver den trimmet og gjort til små bogstaver for at sikre et ensartet format.
+
+            if (tekst === "") return; //Her bliver der tjekket om der er tilføjet tekst i inputfeltet. Hvis det er tomt, så sker der ikke noget.
+            
+            const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; //Her gemmer vi det spørgsmål vi er kommet til i en variable, så vi kan bruge det i funktionen gemSvar.
+
+            gemSvar(spoergsmaalData.id, tekst); //Funktionen gemSvar sender spørgsmålets id videre sammen med den teskt der et i inputfeltet, så det kan gemmes på samme måde som de andre svar.
+        });
 
 
 //<----- Flow ----->
@@ -177,90 +263,8 @@ function startFlow(event) {
   }
 }
 
-//<----- Her kommer en funktion der skal vise spørgsmålene ----->
-function visSpoergsmaal() {
-  const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi spørgsmålene som vi er kommet til i en variable.
-  svarBobler.innerHTML = ""; // Her tømmer vi vores boble element (svaremuligheder), så det er klar til at vise de nye svarmuligheder.
-  svarBobler.style.opacity = 0; // Boblerne bliver usynligt
-  inputContainer.classList.remove("visInput");
-  egetSvar.value = ""; // Her sker det samme, bare med svarinput.
-  spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
 
-  //spørgsmål fader ind
-  setTimeout(() => {
-    // Efter 1 sekund (1000 ms), så sker følgende:
-    spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
-    spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
-  }, 1000); // Her sætter vi tiden til 1 sekund.
 
-  // svar kommer senere
-  setTimeout(() => {
-    // efter 4 sekunder,så sker der følgende
-
-    spoergsmaalData.svarmuligheder.forEach((svar) => {
-      //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
-      const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
-      boble.textContent = svar; // Her indsættes nye svarmuligheder og giver boblen den tekst, som svaret har.
-      boble.addEventListener("click", () => {
-        gemSvar(spoergsmaalData.id, svar);
-      }); // Nu har vi tilføjet at når man klikker på boblen (knappen) så afyres en funktion der gemmer det svar.
-
-      svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
-    });
-    svarBobler.style.opacity = 1; // Boblerne bliver helt synlig
-    inputContainer.classList.add("visInput");
-  }, 2000); //Her sætter vi tiden til 2 sekunder.
-}
-
-//<----- Funktion til at gemme svar ----->
-function gemSvar(spoergsmaalId, svar) {
-  //Her opretter vi en funktion gemSvar med parameterne spoergsmaalId, svar
-  svar = svar.trim().toLowerCase(); // Her bliver svaret trimmet og gjort til små bogstaver, for at sørge for at vi får et ensartet format.
-
-  brugerSvar[spoergsmaalId] = svar; // Svaret bliver gemt i brugerSvar efter det er gjort ensartet.
-
-  // I vores løsning vil vi kun gemme svarene til spørgsmål 3 i local storage, derfor laver vi et if statement
-  if (spoergsmaalId === 3) {
-    //Vi tjekker derfor om spoergsmaalId er 3. Det gør vi ved at bruge === som tjekker om både værdien og datatypen er 100% den samme.
-    const gamleSvar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; // gamle svar bliver hentet fra local storage, hvor den leder efter "wordcloudSvar" ved at bruge JSON.parse bliver teksten lavet til javascript data (skriv mere senere).
-
-    gamleSvar.push(svar); // Her pushes det nye svar ind i arrayet af gamle svar.
-    localStorage.setItem("wordcloudSvar", JSON.stringify(gamleSvar)); // Her gemmer vi den opdaterede liste af svar i local storage og bruger .JSON.stringify for at lave arrayet tilbage til en string.
-  }
-
-  //Her kommer næste spørgsmål
-  nuvaerendeSpoergsmaal++; // ++ bruges til at øge værdien af nuvaerendeSpoergsmaal med 1, og dermed gå til næste spørgsmål. Altså hvis vi er ved spørgsmål 1, der bliver der plusset 1 på spørgsmålet og det bliver til 2, og så viser den spørgsmål 2.
-  if (nuvaerendeSpoergsmaal < spoergsmaal.length) {
-    //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet spoergsmaal
-    visSpoergsmaal(); //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
-  } else {
-    //ellers så viser den følgende:
-    quiz.style.display = "none";
-    wordcloudId.style.display = "block";
-    visWordcloud(); // Funktion kaldes på så wordclouden vises med de nye svar.
-
-    // SKAL MÅSKE ÆNDRES
-    // spoergsmaalTekst.textContent = "Tak for vise dit indre"; // Her ændres teksten til en tak for at deltage
-    // svarBobler.innerHTML = ""; //Her tømmer vi indholdet i boblerne
-    // egetSvar.style.display = "none"; //Her får vi inputsfeltet med eget svar til at forvinde
-    // egetSvarBoble.style.display = "none"; //Her får vi knappen til inputsfeltet til at forsvinde
-
-    // console.log(brugerSvar);
-  }
-}
-
-//<----- Eget svar ----->
-//Her laver vi så at eget svar bliver trimmet og gjort til små bogstaver.
-
-egetSvarBoble.addEventListener("click", () => {
-  //Her er så det er muligt at klikke på knappen
-  const tekst = egetSvar.value.trim().toLowerCase(); //Her gemmer vi det der står i inputfeltet i en variable, og der bliver også trimmet og gjort til små bogstaver for at sikre et ensartet format.
-
-  if (tekst === "") return; //Her bliver der tjekket om der er tilføjet tekst i inputfeltet. Hvis det er tomt, så sker der ikke noget.
-  const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; //Her gemmer vi det spørgsmål vi er kommet til i en variable, så vi kan bruge det i funktionen gemSvar.
-
-  gemSvar(spoergsmaalData.id, tekst); //Funktionen gemSvar sender spørgsmålets id videre sammen med den teskt der et i inputfeltet, så det kan gemmes på samme måde som de andre svar.
-});
 
 //<----- Wordcloud funktionen ----->
 //Her laver vi så at wordclouden fungere
