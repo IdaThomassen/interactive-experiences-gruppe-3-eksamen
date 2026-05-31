@@ -14,6 +14,7 @@
         const wordcloudContainer = document.getElementById("wordcloudContainerId");
         const wordcloudId = document.getElementById("wordcloudId");
         const resetKnap = document.getElementById("resetKnapId");
+        const bobleLyd = document.getElementById("bobleLyd");
 
 
 
@@ -189,7 +190,9 @@
                     const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
                     boble.textContent = svar; // Her indsættes nye svarmuligheder og giver boblen den tekst, som svaret har.
                     boble.addEventListener("click", () => {
-                        gemSvar(spoergsmaalData.id, svar);
+                      bobleLyd.currentTime = 0; // Her sætter vi lyden tilbage til starten, så den kan afspilles hver gang der klikkes på en boble.
+                      bobleLyd.play(); //Her afspiller vi boblelyden, når brugeren klikker på en svarboble.
+                      gemSvar(spoergsmaalData.id, svar);
                     }); // Nu har vi tilføjet at når man klikker på boblen (knappen) så afyres en funktion der gemmer det svar.
 
                     svarBobler.appendChild(boble); // Her tilføjes den sidste nye boble (knap) til resten af boblefamilien.
