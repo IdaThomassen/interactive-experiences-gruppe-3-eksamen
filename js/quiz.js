@@ -21,7 +21,7 @@
 
 //--------Webcam spejl--------------------------------------------------------
 
-    //<----- funktion for start webcam ----->
+    //<----- Funktion for start webcam ----->
         async function startWebcam() { //venter på adgang til kameraet før funktionen må kører
             const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Vi opetter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, må går den i gang.
             document.getElementById("webcam").srcObject = stream; // Vi henter html elementet id "webcam" og sætter dens srcObject til stream.
@@ -55,11 +55,11 @@
         //Vi skal lave en funktion som viser vores introtekster, denne funktion kalder vi for visIntro()
             function visIntro() {
                 //-----Rengøring-----
-                    inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
+                    inaktivTekst.classList.remove("vis"); //Når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
 
                     klikVidere.classList.remove("visKlikVidere");
 
-                setTimeout(() => { //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
+                setTimeout(() => { //Vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
 
                     //-----Rengøring-----
                         inaktivTekst.classList.remove("introEt", "introTo"); //Derfor sørger vi for at fjerne de to class navne, så vi ikke risikere at den ikke med at have begge på en gang.
@@ -67,12 +67,12 @@
                     //-----Tilføjelse af classer-----
                         //Vi vil have lavet sådan at hver af de to intro tekster for hver deres class navn, så vi kan style dem forskeligt inde i css.
 
-                        if (introStep === 0) { // denne sætning siger at hvis introStep er lig med 0 både datatypen og værdien (0 er index tallet)
+                        if (introStep === 0) { // Denne sætning siger at hvis introStep er lig med 0 både datatypen og værdien (0 er index tallet)
                             inaktivTekst.classList.add("introEt"); // så tilføjer vi classen introEt
                         }
 
-                        if (introStep === 1) { //hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
-                            inaktivTekst.classList.add("introTo"); // så tilføjer vi classen introTo
+                        if (introStep === 1) { //Hvis introStep er lige med 1 både datatypen og værdien (1 er index tallet)
+                            inaktivTekst.classList.add("introTo"); // Så tilføjer vi classen introTo
                         }
 
 
@@ -84,21 +84,21 @@
                     //----- Vis linjer med forsinkelse + tryk for at fortsætte vises-----
                         // Vi vil have lavet sådan at hver linje får en class der hedder "visLinje" med et tidsrum imellem
                         setTimeout(() => {
-                            linjer[0].classList.add("visLinje"); // vi tilføjer classen "visLinje" til den første linje, som vi med css styler til at blive synlig
+                            linjer[0].classList.add("visLinje"); // Vi tilføjer classen "visLinje" til den første linje, som vi med css styler til at blive synlig
                         }, 1000);
 
                         setTimeout(() => {
                             linjer[1].classList.add("visLinje");
-                        }, 4000); //bliver synlig efter 4 sekunder
+                        }, 4000); //Bliver synlig efter 4 sekunder
 
                         setTimeout(() => {
                             linjer[2].classList.add("visLinje");
-                        }, 7000); //bliver synlig efter 7 sekunder
+                        }, 7000); //Bliver synlig efter 7 sekunder
 
                         setTimeout(() => {
                             klikVidere.classList.add("visKlikVidere");
                         }, 8000); //Efter 8 sekunder bliver vores klikVidere synlig
-                }, 2000); //der går 2 sekunder før funktionen bliver affyrret
+                }, 2000); //Der går 2 sekunder før funktionen bliver affyrret
             }
 
 //--------Progress Bar--------------------------------------------------------
@@ -185,14 +185,14 @@
                 egetSvar.value = ""; // egetSvar værdi bliver tømt
                 spoergsmaalTekst.classList.remove("vis"); // //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder.
 
-            //-----spørgsmål fader ind-----
+            //-----Spørgsmål fader ind-----
                 setTimeout(() => { // Efter 1 sekund (1000 ms), så sker følgende:
                     spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; // Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
                     spoergsmaalTekst.classList.add("vis"); //Denne libje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst.
                 }, 1000); // Her sætter vi tiden til 1 sekund.
 
             //-----Svarmuligheder og input kommer senere-----
-                setTimeout(() => { // efter 4 sekunder,så sker der følgende
+                setTimeout(() => { // Efter 4 sekunder,så sker der følgende
 
                     spoergsmaalData.svarmuligheder.forEach((svar) => { //Her laver vi en loop der går igennem alle svarmulighederne for det spørgsmål vi er kommet til.
                     const boble = document.createElement("button"); // For hvert svar opretter vi en boble (knap).
@@ -222,18 +222,18 @@
             //-----local storage-----
                 // I vores løsning vil vi kun gemme svarene til spørgsmål 3 i local storage, derfor laver vi et if statement
                 if (spoergsmaalId === 3) {   //Vi tjekker derfor om spoergsmaalId er 3. Det gør vi ved at bruge === som tjekker om både værdien og datatypen er 100% den samme.
-                    const gamleSvar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; // her henter vi gamle svar i local storage som ligger under "wordcloudSvar". Med JSON.parse bliver teksten lavet til javascript data istedet for en lang tekststreng. Hvis der ikke er noget i local storage, så starter den med et tomt array.
+                    const gamleSvar = JSON.parse(localStorage.getItem("wordcloudSvar")) || []; // Her henter vi gamle svar i local storage som ligger under "wordcloudSvar". Med JSON.parse bliver teksten lavet til javascript data istedet for en lang tekststreng. Hvis der ikke er noget i local storage, så starter den med et tomt array.
 
                     gamleSvar.push(svar); // Her pushes det nye svar ind i arrayet af gamle svar.
                     localStorage.setItem("wordcloudSvar", JSON.stringify(gamleSvar)); // Her gemmer vi den opdaterede liste af svar i local storage og bruger .JSON.stringify for at lave arrayet tilbage til en string.
                 }
 
             //-----Her kommer næste spørgsmål-----
-                //først når svaret er blevet gemt, må vi gå videre til næste spørgsmål
-                nuvaerendeSpoergsmaal++; // ++ bruges til at øge værdien af nuvaerendeSpoergsmaal med 1, og dermed gå til næste spørgsmål. Altså hvis vi er ved spørgsmål 1 (indeks 0), der bliver der plusset 1 på og det bliver til indeks 1, og så viser den spørgsmål 2. (spørgsmål 2 = indeks 1)
+                //Først når svaret er blevet gemt, må vi gå videre til næste spørgsmål
+                nuvaerendeSpoergsmaal++; // ++ Bruges til at øge værdien af nuvaerendeSpoergsmaal med 1, og dermed gå til næste spørgsmål. Altså hvis vi er ved spørgsmål 1 (indeks 0), der bliver der plusset 1 på og det bliver til indeks 1, og så viser den spørgsmål 2. (spørgsmål 2 = indeks 1)
                 
-                if (nuvaerendeSpoergsmaal < spoergsmaal.length) { //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet spoergsmaal
-                    visSpoergsmaal(); //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
+                if (nuvaerendeSpoergsmaal < spoergsmaal.length) { //Hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet spoergsmaal
+                    visSpoergsmaal(); //Hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
                 } else {
                     progressFyld.style.width = "100%"; // Her sætter vi bredden på progressFyld elementet til 100%, så den viser at quizzen er fuldført.
                     quiz.style.display = "none"; // Her sætter vi display på quiz elementet til "none", så quizzen forsvinder fra skærmen.
@@ -248,7 +248,7 @@
 
     //<----- Eget svar gemmes - Event listener på send knap ----->
         //Vi vil gerne have lavet det sådan at eget svar bliver gemt
-        egetSvarBoble.addEventListener("click", () => { //Når egetSvarBoble (send knappen) klikkes på sker der:
+        egetSvarBoble.addEventListener("click", () => { // Når egetSvarBoble (send knappen) klikkes på sker der:
             const tekst = egetSvar.value.trim().toLowerCase(); //Så gemmer vi det der står i inputfeltet i en variable tekst, og der bliver den trimmet og gjort til små bogstaver for at sikre et ensartet format.
 
             if (tekst === "") return; //Her bliver der tjekket om der er tilføjet tekst i inputfeltet. Hvis det er tomt, så sker der ikke noget.
@@ -283,17 +283,17 @@
                         count[ord]++; //Hvis ordet findes lægger der 1 til værdien. Jo flere gange den optræder, jo højere er optællingen.
                     } 
                     else {
-                        count[ord] = 1; // hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
+                        count[ord] = 1; // Hvis ordet ikke allerede findes på listen, tilføjes det på listen og optællings værdien til 1.
                     }
                 }
 
 
             //-----Sortering af ordenes optælling i funktionen i funktionen-----
-                //den optælling vil vi gerne have gemt i et nyt array, som vi skal bruge til at sortere ordene efter optælling 
-                let ordArray = []; // her laver vi et array, hvor vi vil gemme ordene i
+                // Den optælling vil vi gerne have gemt i et nyt array, som vi skal bruge til at sortere ordene efter optælling 
+                let ordArray = []; // Her laver vi et array, hvor vi vil gemme ordene i
 
                 for (let ord in count) { // For hvert ord i vores const count.
-                    ordArray.push({tekst: ord, antal: count[ord],}); // pusher den hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal 
+                    ordArray.push({tekst: ord, antal: count[ord],}); // Pusher den hvert ord ind i vores ordArray, her laver den et lille objekt for hvert ord, hvor den tilføjer antributterne tekst og antal 
                 }
 
                 ordArray.sort((a, b) => b.antal - a.antal); // Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0]
@@ -308,11 +308,11 @@
                 ordArray.forEach((ordObj, index) => {
                     // Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) 
                     if (index % 2 === 0) { // Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray 
-                        centreretArray.push(ordObj); // hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord 
+                        centreretArray.push(ordObj); // Hvis tallet er lige så skal ordObj tilføjes til det ord til efter det centreret ord 
                     } 
 
                     else {
-                        centreretArray.unshift(ordObj); //hvis tallet ikke er lige = derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray 
+                        centreretArray.unshift(ordObj); // Hvis tallet ikke er lige = derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray 
                     }
                 });
 
@@ -359,7 +359,7 @@
                 });
         }
 
-        //<-----reset knap----->
+             //<-----Reset knap----->
             resetKnap.addEventListener("click", () => {
             localStorage.removeItem("wordcloudSvar"); // Her sletter vi "wordcloudSvar" fra local storage, så alle svarene bliver fjernet.
             visWordcloud();
@@ -369,21 +369,21 @@
 
 //--------Flow--------------------------------------------------------  
 
-    //<-----flowet----->
+    //<-----Flowet----->
         //Man skal klikke sig igennem flowet
 
         document.body.addEventListener("click", startFlow); //Her har vi tilføjet en event listener til hele body element, hvor vi har sagt den skal lytte efter et click og derefter affyre funktionen startFlow.
 
         function startFlow(event) {   // Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på.
             if (
-                event.target.tagName === "BUTTON" || // hvis der bliver klikket på en knap
-                event.target.tagName === "INPUT" // hvis der bliver klikket på et input felt
+                event.target.tagName === "BUTTON" || // Hvis der bliver klikket på en knap
+                event.target.tagName === "INPUT" // Hvis der bliver klikket på et input felt
             ) {return;} // Hvis der bliver klikket på en knap eller et input felt, så stopper vi funktionen her.
 
             //-----Intro start-----
-                if (introStep < introTekster.length - 1) { // hvis introStep er mindre end længden af introTekster, så
-                    introStep++; // så øger vi introStep med 1, så vi kommer til næste introtekst.
-                    visIntro(); // kalder på funktionen som viser introtekst.
+                if (introStep < introTekster.length - 1) { // Hvis introStep er mindre end længden af introTekster, så
+                    introStep++; // Så øger vi introStep med 1, så vi kommer til næste introtekst.
+                    visIntro(); // Kalder på funktionen som viser introtekst.
                 } 
 
                 
@@ -400,12 +400,12 @@
                         visSpoergsmaal(); // Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter.
                     }, 2500); // Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder.
 
-                    introStep++; // her øger vi værdien af introStep med 1.
+                    introStep++; // Her øger vi værdien af introStep med 1.
                 }
         }
 
-    //<-----Restart flow----->
-        // Dette er en funktion der først går i gang, når man trykker på knappen.
+            //<-----Restart flow----->
+            // Dette er en funktion der først går i gang, når man trykker på knappen.
         function restartFlow() {
           nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstillede og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0.
           introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten.

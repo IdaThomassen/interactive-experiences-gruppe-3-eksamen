@@ -125,10 +125,10 @@ h1 {
 
 /*<-----Quiz----->*/
 .quiz {
-  /* quiz sektionen */
-  display: none; /* quiz sektionen bliver skjult */
-  width: 80%; /* quiz sektionen fylder 80% af bredden */
-  max-width: 800px; /* quiz sektionen har en maksimal bredde på 800px */
+  /* Quiz sektionen */
+  display: none; /* Quiz sektionen bliver skjult */
+  width: 80%; /* Quiz sektionen fylder 80% af bredden */
+  max-width: 800px; /* Quiz sektionen har en maksimal bredde på 800px */
 }
 
 #spoergsmaalTekst {
@@ -229,22 +229,22 @@ h1 {
 /*Animation af bobler*/
 @keyframes boblePuls {
   0% {
-    /*startpunktet*/
+    /*Startpunktet*/
     transform: scale(
       1
-    ); /*boblen scalere op til 100% af dens normale størrelse*/
+    ); /*Boblen scalere op til 100% af dens normale størrelse*/
   }
 
   50% {
-    /*midtpunkt*/
+    /*Midtpunkt*/
     transform: scale(
       1.1
-    ); /*boblen scalere op til 200% af dens normale størrelse*/
+    ); /*Boblen scalere op til 200% af dens normale størrelse*/
   }
 
   100% {
-    /*slutpunkt*/
-    transform: scale(1); /*scalere ned til dens normale størrelse igen*/
+    /*Slutpunkt*/
+    transform: scale(1); /*Scalere ned til dens normale størrelse igen*/
   }
 }
 
@@ -254,9 +254,9 @@ video#webcam {
   top: 0;
   left: 0; /* Starter i toppen men i venstre hjørne*/
   width: 100%; /*Fylder hele bredden*/
-  height: 100%; /* fylder højden af skærmen*/
+  height: 100%; /* Fylder højden af skærmen*/
   object-fit: cover; /* Videocam fylder hele hele skærmen*/
-  z-index: -1; /* placere elementer bagved de andre elementer*/
+  z-index: -1; /* Placere elementer bagved de andre elementer*/
   transform: scaleX(-1); /* Spejlvender videoen*/
 }
 
@@ -290,7 +290,7 @@ video#webcam {
   background-color: transparent; /*Gør at knappen bliver gennemsigtigt*/
 }
 
-/* - inputsfelt */
+/* ---inputsfelt--- */
 
 #egetSvar {
   width: 350px;
@@ -329,7 +329,7 @@ video#webcam {
   font-family: var(--font);
   font-size: 1.2em;
 
-  cursor: pointer; /**Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
+  cursor: pointer; /** Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
 }
 
 .inputContainer {
@@ -349,11 +349,11 @@ video#webcam {
 }
 
 /*<-----Wordcloud----->*/
-/*den container som indeholder wordclouden, både titel og indhold*/
+/*Den container som indeholder wordclouden, både titel og indhold*/
 .wordcloud {
-  display: none; /*skjuler wordclouden indtil vi gør den synlig med vores javascript*/
-  width: 100%; /*bredden på wordclouden*/
-  max-width: 80%; /*den maksimale bredde wordclouden kan blive, så den kan kun blive 80% af skærmen*/
+  display: none; /*Skjuler wordclouden indtil vi gør den synlig med vores javascript*/
+  width: 100%; /*Bredden på wordclouden*/
+  max-width: 80%; /*Den maksimale bredde wordclouden kan blive, så den kan kun blive 80% af skærmen*/
 }
 
 .wordcloud h2 {
@@ -364,18 +364,18 @@ video#webcam {
 /*Den container som indeholder ordene i wordclouden*/
 .wordcloudContainer {
   display: flex;
-  flex-wrap: wrap; /*så ordene flytter sig til næste linje hvis der ikke er plads i containeren*/
-  justify-content: center; /* ordene bliver centeret vandret*/
-  align-items: center; /*centerer ordene lodret*/
+  flex-wrap: wrap; /*Så ordene flytter sig til næste linje hvis der ikke er plads i containeren*/
+  justify-content: center; /* Ordene bliver centeret vandret*/
+  align-items: center; /*Centerer ordene lodret*/
   align-content: center; /*Centerer indholdet i containeren*/
   padding: 30px;
   min-height: 450px;
 }
 
-/*styling af selve ordene i wordclouden*/
+/*Styling af selve ordene i wordclouden*/
 .word {
-  display: inline-block; /*gør at ordene kan stå ved siden af hinanden, men de opføre sig også blok elementer */
+  display: inline-block; /* Gør at ordene kan stå ved siden af hinanden, men de opføre sig også blok elementer */
   line-height: 1;
   font-weight: 900; /*Gør teksten federe*/
-  text-transform: uppercase; /*blokbogstaver*/
+  text-transform: uppercase; /*Blokbogstaver*/
 }
