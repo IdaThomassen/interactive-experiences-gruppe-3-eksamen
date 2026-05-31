@@ -61,6 +61,40 @@ h1 {
   opacity: 1;
 }
 
+/*------Klik for at fortsætte--------------------------------------*/
+    #klikVidere {
+        position: fixed; /* Dette låser teksten */
+        bottom: 20px;
+        left: 50%; 
+        transform: translateX(-50%); /* Centrerer teksten horisontalt */
+        opacity: 0; /* Starter som usynlig */
+        color: var(--boblefarvekant); 
+        font-size: 1.5em;
+        font-family: var(--font);
+        font-weight: bold;
+        transition: opacity 2s ease; /* Animerer overgangen fra usynlig til synlig */
+        
+    }
+
+    /*Når teksten bliver synlig*/
+        .visKlikVidere {
+            opacity: 1; /* Når denne klasse tilføjes, bliver teksten synlig */
+            animation: blinke 2s infinite; /* Vi tilføjer animationen blinke, så teksten blinker */
+        }
+
+    /*-----Animation til at blinke-----*/
+        @keyframes blinke {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
 /*<-----Progress Bar----->*/
 
 #progressContainer {

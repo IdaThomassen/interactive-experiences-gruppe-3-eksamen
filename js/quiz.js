@@ -4,6 +4,7 @@
 
     //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
         const inaktivTekst = document.getElementById("inaktivTekst");
+        const klikVidere = document.getElementById("klikVidere");
         const progressFyld = document.getElementById("progressFyld");
         const quiz = document.querySelector(".quiz");
         const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
@@ -53,7 +54,10 @@
 
         //Vi skal lave en funktion som viser vores introtekster, denne funktion kalder vi for visIntro()
             function visIntro() {
-                inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
+                //-----Rengøring-----
+                    inaktivTekst.classList.remove("vis"); //når funktionen først spilles fjerner den classen 'vis' fra vores html element inaktivTekst.
+
+                    klikVidere.classList.remove("visKlikVidere");
 
                 setTimeout(() => { //vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools).
 
@@ -77,7 +81,7 @@
                         inaktivTekst.classList.add("vis"); // Her tilføjes classen 'vis' igen efter x antal sekunder, hvor vi inde i css har gjort sådan at når denne class tilføjes bliver opacity sat til 1.
                         const linjer = document.querySelectorAll(".linje"); 
 
-                    //----- Vis linjer med forsinkelse -----
+                    //----- Vis linjer med forsinkelse + tryk for at fortsætte vises-----
                         // Vi vil have lavet sådan at hver linje får en class der hedder "visLinje" med et tidsrum imellem
                         setTimeout(() => {
                             linjer[0].classList.add("visLinje"); // vi tilføjer classen "visLinje" til den første linje, som vi med css styler til at blive synlig
@@ -90,6 +94,10 @@
                         setTimeout(() => {
                             linjer[2].classList.add("visLinje");
                         }, 7000); //bliver synlig efter 7 sekunder
+
+                        setTimeout(() => {
+                            klikVidere.classList.add("visKlikVidere");
+                        }, 8000); //Efter 8 sekunder bliver vores klikVidere synlig
                 }, 2000); //der går 2 sekunder før funktionen bliver affyrret
             }
 
@@ -387,6 +395,7 @@
                     setTimeout(() => {
                         // Efter 2,5 sekunder (2500 ms), så sker følgende:
                         inaktivTekst.style.display = "none"; // Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none".
+                        klikVidere.style.display = "none"; // Klik for at fortsætte bliver usynlig når quizzen starter.
                         quiz.style.display = "block"; // Her får vi quiz elementet til at dukke op ved at sætte display til "block".
                         visSpoergsmaal(); // Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter.
                     }, 2500); // Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder.
@@ -416,6 +425,7 @@
 
 //----------------------------------------------------------------  
 inaktivTekst.classList.add("vis");
+klikVidere.classList.add("visKlikVidere");
 
 // visSpoergsmaal(); // Her starter vi quizzen ved at vise det første spørgsmål.
 // visWordcloud(); // Her viser vi wordclouden, så den er klar til at vise de nye svar når de kommer ind.
