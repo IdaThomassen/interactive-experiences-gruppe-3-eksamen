@@ -309,7 +309,7 @@ video#webcam {
   backdrop-filter: blur(6px);
 
   outline: none;
-  margin-top: 20px;
+  
 }
 #egetSvar::placeholder {
   /*ændre farven på" skriv eget svar"*/
@@ -328,6 +328,11 @@ video#webcam {
 
   font-family: var(--font);
   font-size: 1.2em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 
   cursor: pointer; /** Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
 }
