@@ -4,6 +4,7 @@
 
     //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id.
         const inaktivTekst = document.getElementById("inaktivTekst");
+        const progressFyld = document.getElementById("progressFyld");
         const quiz = document.querySelector(".quiz");
         const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
         const svarBobler = document.getElementById("svarBobler");
@@ -13,7 +14,6 @@
         const wordcloudContainer = document.getElementById("wordcloudContainerId");
         const wordcloudId = document.getElementById("wordcloudId");
         const resetKnap = document.getElementById("resetKnapId");
-
 
 
 
@@ -92,6 +92,16 @@
                 }, 2000); //der går 2 sekunder før funktionen bliver affyrret
             }
 
+//--------Progress Bar--------------------------------------------------------
+
+    //Dette er funktionen der gør at progress baren bliver opdateret
+        function opdaterProgressBar() {
+            const total = spoergsmaal.length; //Her gemmer vi antal spørgsmål i en variabel, det gør vi ved at tjekke længden af arrayet spoergsmaal.
+            const current = nuvaerendeSpoergsmaal; //Her gemmer vi det spørgsmål vi er kommet til i en variabel, så vi kan bruge det i funktionen. 
+            const procent = (current / total) * 100; //Her regner vi ud hvor mange procent af quizzen vi er kommet igennem
+            progressFyld.style.width = procent + "%"; // Her sætter vi bredden på progressFyld elementet til den procent vi har regnet ud, og tilføjer "%" for at gøre det til procent. Altså så når man er kommet 1/3 igennem, viser den en bar der er fyldt 33% ud.
+        }
+
 
 
 
@@ -111,7 +121,7 @@
             "Mine øjne",
             "En taber",
             "Min hårfarve",
-            "Mine næse",
+            "Min næse",
             ],
         },
         {
@@ -156,6 +166,7 @@
 
     //<----- Funktion som viser spørgsmål og svarmuligheder ----->
         function visSpoergsmaal() {
+            opdaterProgressBar(); // Her kalder vi på funktionen opdaterProgressBar, så den bliver opdateret hver gang vi kommer til et nyt spørgsmål.
             const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi det spørgsmål vi er kommet til i variablen spoergsmaalData.
             
             //-----Rengøring-----
@@ -212,17 +223,17 @@
                 
                 if (nuvaerendeSpoergsmaal < spoergsmaal.length) { //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet spoergsmaal
                     visSpoergsmaal(); //hvis nuvaerendeSpoergsmaal er mindre end længden af det samlede antal objekter i arrayet vises spørgsmålet
-                } 
-                else {   //ellers sker der følgende, hvis nuvaerendeSpoergsmaal ikke er mindre end længden af det samlede antal objekter i arrayet
-                    quiz.style.display = "none"; //quiz styles så den bliver usynlig
-                    wordcloudId.style.display = "block"; //og wordclouden styles til at blive synlig
-                    visWordcloud(); // Funktion kaldes på så wordclouden vises med de besøgendes svar.
+                } else {
+                    progressFyld.style.width = "100%"; // Her sætter vi bredden på progressFyld elementet til 100%, så den viser at quizzen er fuldført.
+                    quiz.style.display = "none"; // Her sætter vi display på quiz elementet til "none", så quizzen forsvinder fra skærmen.
+                    wordcloudId.style.display = "block"; // Her sætter vi display på wordcloudId elementet til "block", så wordclouden dukker op på skærmen.
+                    visWordcloud();
+                 }
+                }
+                
 
                 // console.log(brugerSvar);
-            }
-        }
-
-
+            
 
     //<----- Eget svar gemmes - Event listener på send knap ----->
         //Vi vil gerne have lavet det sådan at eget svar bliver gemt
@@ -384,13 +395,16 @@
     //<-----Restart flow----->
         // Dette er en funktion der først går i gang, når man trykker på knappen.
         function restartFlow() {
-            nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstillede og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0.
-            introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten.
-            wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none".
-            inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block".
-            inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
-            inaktivTekst.classList.add("vis"); //Tilføjer css clssen "vis" til inaktivTekst, så den bliver synlig igen.
-            quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none".
+          nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstillede og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0.
+          introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten.
+          progressFyld.style.width = "0%"; //Denne linje sørger for at progress baren bliver nulstillet ved at sætte bredden på progressFyld til 0%.
+          wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none".
+          inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block".
+          inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
+          inaktivTekst.classList.add("vis"); //Tilføjer css clssen "vis" til inaktivTekst, så den bliver synlig igen.
+          inaktivTekst.classList.remove("introTo"); //Fjerner classen introTo, så den ikke forstyrrer styling af den første introtekst.
+          inaktivTekst.classList.add("introEt"); //Sørger for at den første introtekst har den rigtige styling ved at fjerne classen introTo og tilføje classen introEt.
+          quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none".
         }
 
         restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra.
