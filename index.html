@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,50 +7,48 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- Webcam starter her -->
-    <video id="webcam" autoplay playsinline muted></video>
+    <!--Webcam starter her-->
+      <video id="webcam" autoplay playsinline muted></video>
 
-     <!-- Boble lyd -->
-        <audio id="bobleLyd" src="sound/bobleLyd.mp3"></audio>
+    <!--Boble lyd-->
+      <audio id="bobleLyd" src="sound/bobleLyd.mp3"></audio>
 
-    <!-- Starts skrærm -->
-     <div class="content"></div>
-
+    <!--Start skærm-->
+      <div class="content"></div>
+      
     <h1 id="inaktivTekst">Træd tættere på og se dig selv i øjnene</h1>
 
-     <!-- Forsaet knap -->
-    <p id="klikVidere">Tryk for at fortsætte</p>
+    <!--Fortsæt knap-->
+      <p id="klikVidere">Tryk for at fortsætte</p>
 
-    <!-- Progress bar-->
-     <!-- Strukturen for progress baren -->
-    <div id="progressContainer">
-     <div id="progressBar"> <!--Selve baren der er på skærmen--> 
-       <div id="progressFyld"></div> <!--Den her bruges til at se lang personen er kommet--> 
-     </div>
-   </div>
+    <!--Progress bar-->
+      <!--Strukturen for progress baren-->
+        <div id="progressContainer">
+          <div id="progressBar"> <!--Selve baren der er på skærmen--> 
+           <div id="progressFyld"></div> <!--Den her bruges til at se langt personen er kommet--> 
+          </div>
+        </div>
 
-    <!-- Quizzen starter her -->
+    <!--Quizzen starter her-->
+      <div class="quiz">
+        <h2 id="spoergsmaalTekst"></h2>
+          <div id="svarBobler"></div>
+          <div class="inputContainer">
+          <input type="text" id="egetSvar" placeholder="Skriv dit eget svar" />
+          <button id="egetSvarBoble">Send</button>
+          </div> 
+      </div>
 
-    <div class="quiz">
-      <h2 id="spoergsmaalTekst"></h2>
-      <div id="svarBobler"></div>
+    <!--Her kommer wordcloud-->
+      <div class="wordcloud" id="wordcloudId">
+        <h2>Du er aldrig alene - mange andre har det ligesom dig</h2>
+        <div class="wordcloudContainer" id="wordcloudContainerId"></div>
+          <!--Her har vi lavet en knap der kan rydde wordcloud, vi har brugt den imens vi har testet kode. Vi har valgt at beholde den, da det er hurtig at tilføje den igen, hvis vi har brug for den. Man kan også rydde ordskyen i cache.-->
+          <!--<button class="resetKnap" id="resetKnapId">Ryd wordcloud</button>-->
+        </div>
 
-      <div class="inputContainer">
-       <input type="text" id="egetSvar" placeholder="Skriv dit eget svar" />
-       <button id="egetSvarBoble">Send</button>
-     </div> 
-    </div>
-
-    <!-- Her kommer wordcloud -->
-    <div class="wordcloud" id="wordcloudId">
-      <h2>Du er aldrig alene - mange andre har det ligesom dig</h2>
-      <div class="wordcloudContainer" id="wordcloudContainerId"></div>
-      <!-- Her laver vi lige en ryd wordcloud knap, så vi kan rydde dens mens vi arbejder på den -->
-      <!--<button class="resetKnap" id="resetKnapId">Ryd wordcloud</button>-->
-    </div>
-
-    <button id="restartKnap">↻</button>
-      <!-- Her bliver der tilføjet en knap, som kan genstarte oplevelsen -->
+    <!--Her bliver der tilføjet en knap, som kan genstarte oplevelsen-->
+      <button id="restartKnap">↻</button>
 
     <script src="js/quiz.js"></script>
   </body>
