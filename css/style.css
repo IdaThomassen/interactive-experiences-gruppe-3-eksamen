@@ -1,74 +1,76 @@
 /*------Root--------------------------------------*/
-/*<-----Vores root----->*/
-/*Her definerer vi faste variabler som vi bruger i hele dokumentet*/
+    /*Her definerer vi faste variabler som vi bruger i hele dokumentet*/
     :root {
-      --tekst: #ffffff;
-      --font: georgia, serif;
-      --boblefarvekant: rgba(255, 255, 255, 0.6);
-      --boblebaggrund: rgba(255, 255, 255, 0.2);
+        --tekst: #ffffff;
+        --font: georgia, serif;
+        --boblefarvekant: rgba(255, 255, 255, 0.6);
+        --boblebaggrund: rgba(255, 255, 255, 0.2);
     }
 
-    
+        
+
 /*------Body--------------------------------------*/
-/*<-----Body styling----->*/
-    body {
-      background-color: rgb(20, 22, 46);
-      font-family: var(--font);
-      color: var(--tekst);
+    /*<-----Body styling----->*/
+        body {
+        background-color: rgb(20, 22, 46);
+        font-family: var(--font);
+        color: var(--tekst);
 
-      display: flex;
-      flex-direction: column;
-      justify-content: center; /**/
-      align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /**/
+        align-items: center;
 
-      text-align: center;
-      height: 100vh;
-      margin: 0;
+        text-align: center;
+        height: 100vh;
+        margin: 0;
 
-      overflow: hidden; /*Her gemmer vi det indhold som er uden for skærmen*/
-    }
+        overflow: hidden; /*Her gemmer vi det indhold som er uden for skærmen*/
+        }
+
 
 
 /*------Intro tekst--------------------------------------*/
-/*<-----Intro teksten----->*/
-    #inaktivTekst {
-      opacity: 0; /*Dette gør teksten usynlig*/
-      transition: opacity 2s ease; /*Med denne linje animere vi med en transition, som gør den fra usynlig til synlig på 2 sek*/
-    }
+    /*<-----Intro teksten----->*/
+        #inaktivTekst {
+        opacity: 0; /*Dette gør teksten usynlig*/
+        transition: opacity 2s ease; /*Med denne linje animere vi med en transition, som gør den fra usynlig til synlig på 2 sek*/
+        }
 
-    h1 {
-      font-size: 4.5em;
-    }
+        h1 {
+        font-size: 4.5em;
+        }
 
-    .introEt {
-      font-size: 4.5em;
-    }
+        .introEt {
+        font-size: 4.5em;
+        }
 
-    .introTo {
-      font-size: 2em;
-      max-width: 75%;
-      line-height: 1.5em;
-      text-align: left;
-    }
+        .introTo {
+        font-size: 2em;
+        max-width: 75%;
+        line-height: 1.5em;
+        text-align: left;
+        }
 
-    .vis {
-      opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
-    }
+        .vis {
+        opacity: 1 !important; /*Her sættes teksten synlig, og denne regel er vigtigere end de andre regler*/
+        }
 
-    .linje {
-      display: block;
-      opacity: 0;
-      transition: opacity 2s ease;
-      margin-bottom: 30px;
-    }
+        /*Linjerne*/
+        .linje {
+        display: block;
+        opacity: 0;
+        transition: opacity 2s ease;
+        margin-bottom: 30px;
+        }
 
-    .visLinje {
-      opacity: 1;
-    }
+        .visLinje {
+        opacity: 1;
+        }
+
 
 
 /*------Webcam--------------------------------------*/
-/*<-----Webcam----->*/
     video#webcam {
       position: fixed; /*Dette gør at skærmen bliver fastlåst uden scoll*/
       top: 0;
@@ -81,8 +83,8 @@
     }
 
 
+
 /*------Progress baren--------------------------------------*/
-/*<-----Progress Bar----->*/
      #progressContainer {
      position: fixed;
      top: 20px;
@@ -110,44 +112,47 @@
      }
 
 
+
+
 /*------Tryk for at fortsætte--------------------------------------*/
-/*<-----Tekst der fortæller man skal trykke for at komme videre----->*/
-    #klikVidere {
-        position: fixed; /*Dette låser teksten*/
-        bottom: 20px;
-        left: 50%; 
-        transform: translateX(-50%); /*Centrerer teksten horisontalt*/
-        opacity: 0; /*Starter som usynlig*/
-        color: var(--boblefarvekant); 
-        font-size: 1.5em;
-        font-family: var(--font);
-        font-weight: bold;
-        transition: opacity 2s ease; /*Animerer overgangen fra usynlig til synlig*/
-    }
-
-/*Når teksten bliver synlig*/
-     .visKlikVidere {
-        opacity: 1; /*Når denne klasse tilføjes, bliver teksten synlig*/
-        animation: blinke 2s infinite; /*Vi tilføjer animationen blinke, så teksten blinker*/
-    }
-
-    
-/*-----Animation til at blinke-----*/
-      @keyframes blinke {
-           0% {
-               opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
+    /*<-----Teksten----->*/
+        #klikVidere {
+            position: fixed; /*Dette låser teksten*/
+            bottom: 20px;
+            left: 50%; 
+            transform: translateX(-50%); /*Centrerer teksten horisontalt*/
+            opacity: 0; /*Starter som usynlig*/
+            color: var(--boblefarvekant); 
+            font-size: 1.5em;
+            font-family: var(--font);
+            font-weight: bold;
+            transition: opacity 2s ease; /*Animerer overgangen fra usynlig til synlig*/
         }
+
+        /*Når teksten bliver synlig*/
+        .visKlikVidere {
+            opacity: 1; /*Når denne klasse tilføjes, bliver teksten synlig*/
+            animation: blinke 2s infinite; /*Vi tilføjer animationen blinke, så teksten blinker*/
+        }
+
+        
+    /*-----Animation til at blinke-----*/
+        @keyframes blinke {
+            0% {
+                opacity: 0;
+                }
+                50% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+
 
 
 /*------Quizzen--------------------------------------*/
-/*<-----Quiz----->*/
+    
     .quiz {
         /*Quiz sektionen*/
         display: none; /*Quiz sektionen bliver skjult*/
@@ -155,215 +160,196 @@
         max-width: 800px; /*Quiz sektionen har en maksimal bredde på 800px*/
     }
 
-    #spoergsmaalTekst {
-        color: white; /*Farven på spørgsmålet bliver hvid*/
-        opacity: 0; /*Denne gør teksten usynlig*/
-        transition: opacity 1s; /*Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
-        font-size: 3em;
-    }
 
-/*<-----Svarmuligheder Bobler----->*/
-/*Her er den overordnede stil for boblerne*/
-    #svarBobler {
-        position: relative;
-        width: 100%;
-        height: 450px;
-        margin-top: 20px;
-        opacity: 0;
-        transition: opacity 2s ease;
-    }
+    /*<-----Spørgsmål----->*/
+        #spoergsmaalTekst {
+            color: white; /*Farven på spørgsmålet bliver hvid*/
+            opacity: 0; /*Denne gør teksten usynlig*/
+            transition: opacity 1s; /*Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
+            font-size: 3em;
+        }
 
-/*Boblerne*/
-    #svarBobler button {
-        position: absolute;
-        width: 180px;
-        height: 180px;
 
-        border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.6);
+    /*<-----Svarmuligheder Bobler----->*/
+        /*Her er den overordnede stil for boblerne*/
+            #svarBobler {
+                position: relative;
+                width: 100%;
+                height: 450px;
+                margin-top: 20px;
+                opacity: 0;
+                transition: opacity 2s ease;
+            }
 
-        background-color: rgba(255, 255, 255, 0.2);
-        color: white;
+
+        /*Knapperne Boblerne*/
+            #svarBobler button {
+                position: absolute;
+                width: 180px;
+                height: 180px;
+
+                border-radius: 50%;
+                border: 2px solid rgba(255, 255, 255, 0.6);
+
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+
+                font-family: var(--font);
+                font-size: 1.8em;
+                text-align: center;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                cursor: pointer;
+
+                backdrop-filter: blur(6px);
+                box-shadow: 0 4px 12px color(srgb 0, 0, 0, 0.2);
+
+                transition:
+                transform 0.3s ease,
+                background-color 0.3s ease;
+
+                animation: boblePuls 3s ease-in-out infinite; /*Her bliver den animation vi har lavet tilføjet til boblerne og kører i uendelighed*/
+            }
+
+        /*<-----Boblernes placering----->*/
+            /*Placering af alle boblerne*/
+
+            /*Ensomhed/Dum/Mit grin*/
+            #svarBobler button:nth-child(1) {
+                top: -10%;
+                left: -30%;
+            }
+
+            /*Alle mine fejl/Grim/Mine hænder*/
+            #svarBobler button:nth-child(2) {
+                top: 50%;
+                left: -40%;
+            }
+
+            /*Mit smil/Sød/At blive misforstået*/
+            #svarBobler button:nth-child(3) {
+                top: 35%;
+                left: -10%;
+            }
+
+            /*Mine øjne/Skør/Ikke klog nok*/
+            #svarBobler button:nth-child(4) {
+                top: 0%;
+                left: 75%;
+            }
+
+            /*En taber/Underlig/Ikke god nok*/
+            #svarBobler button:nth-child(5) {
+                top: -30%;
+                left: 110%;
+            }
+
+            /*Min hårfarve/Snaksaglig/Min krop*/
+            #svarBobler button:nth-child(6) {
+                top: 30%;
+                left: 115%;
+            }
+
+            /*Min næse/Venlig/For stille*/
+            #svarBobler button:nth-child(7) {
+                top: 60%;
+                left: 90%;
+            }
+
+
+        /*<-----Boblernes animation----->*/
+            /*Animation af bobler*/
+            @keyframes boblePuls {
+            0% {
+                /*Startpunktet*/
+                transform: scale(
+                1
+                ); /*Boblen scalere op til 100% af dens normale størrelse*/
+            }
+
+            50% {
+                /*Midtpunkt*/
+                transform: scale(
+                1.1
+                ); /*Boblen scalere op til 200% af dens normale størrelse*/
+            }
+
+            100% {
+                /*Slutpunkt*/
+                transform: scale(1); /*Scalere ned til dens normale størrelse igen*/
+            }
+            }
+
+
+
+    /*<----Eget svar - Inputsfelt---->*/
+        #egetSvar {
+        width: 350px;
+        height: 80px;
 
         font-family: var(--font);
-        font-size: 1.8em;
+        font-size: 1.5em;
         text-align: center;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background-color: var(--boblebaggrund);
+        color: #000000; /*Denne ændrer farven på skrivende tekst i "skriv dit eget svar"*/
 
-        cursor: pointer;
+        border: 2px solid var(--boblefarvekant);
+        border-radius: 50px;
 
         backdrop-filter: blur(6px);
-        box-shadow: 0 4px 12px color(srgb 0, 0, 0, 0.2);
 
-        transition:
-          transform 0.3s ease,
-          background-color 0.3s ease;
+        outline: none;
+        }
 
-        animation: boblePuls 3s ease-in-out infinite; /*Her bliver den animation vi har lavet tilføjet til boblerne og kører i uendelighed*/
-      }
+        /*Ændrer farven på "skriv eget svar"*/
+            #egetSvar::placeholder {
+            color: rgb(255, 255, 255);
+            }
 
-/*<-----Boblernes placering----->*/
-/*Placering af alle boblerne*/
-    /*Ensomhed/Dum/Mit grin*/
-    #svarBobler button:nth-child(1) {
-        top: -10%;
-        left: -30%;
-      }
+            #egetSvarBoble {
+            width: 120px;
+            height: 80px;
 
-    /*Alle mine fejl/Grim/Mine hænder*/
-    #svarBobler button:nth-child(2) {
-        top: 50%;
-        left: -40%;
-      }
+            border-radius: 50px;
+            border: white;
 
-    /*Mit smil/Sød/At blive misforstået*/
-    #svarBobler button:nth-child(3) {
-        top: 35%;
-        left: -10%;
-      }
+            background-color: rgba(255, 255, 255, 0.667);
+            color: rgb(255, 255, 255);
 
-    /*Mine øjne/Skør/Ikke klog nok*/
-    #svarBobler button:nth-child(4) {
-        top: 0%;
-        left: 75%;
-      }
+            font-family: var(--font);
+            font-size: 1.2em;
 
-    /*En taber/Underlig/Ikke god nok*/
-    #svarBobler button:nth-child(5) {
-        top: -30%;
-        left: 110%;
-      }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
 
-    /*Min hårfarve/Snaksaglig/Min krop*/
-    #svarBobler button:nth-child(6) {
-        top: 30%;
-        left: 115%;
-      }
-
-    /*Min næse/Venlig/For stille*/
-    #svarBobler button:nth-child(7) {
-        top: 60%;
-        left: 90%;
-      }
+            cursor: pointer; /*Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
+            }
 
 
-/*<-----Boblernes animation----->*/
-    /*Animation af bobler*/
-    @keyframes boblePuls {
-      0% {
-        /*Startpunktet*/
-        transform: scale(
-          1
-        ); /*Boblen scalere op til 100% af dens normale størrelse*/
-      }
+            .inputContainer {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transition: opacity 2s ease;
+            }
 
-      50% {
-          /*Midtpunkt*/
-        transform: scale(
-          1.1
-        ); /*Boblen scalere op til 200% af dens normale størrelse*/
-      }
-
-      100% {
-        /*Slutpunkt*/
-        transform: scale(1); /*Scalere ned til dens normale størrelse igen*/
-      }
-    }
-
-
-
-/*------Restart knappen--------------------------------------*/
-/*<-----Restart knappen----->*/
-    #restartKnap {
-      position: fixed; /*Positionen af knappen*/
-      top: 0px;
-      right: 20px;
-
-      padding: 8px 16px;
-
-      font-size: 4rem; /*Størrelsen på symbolet*/
-      color: var(--tekst);
-
-      border: none;
-      border-radius: 10px;
-
-      cursor: pointer; /*Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
-
-      z-index: 2000;
-      background-color: transparent; /*Gør at knappen bliver gennemsigtig*/
-    }
-
-
-/*------Restart knappen--------------------------------------*/
-/*<----Inputsfelt---->*/
-    #egetSvar {
-      width: 350px;
-      height: 80px;
-
-      font-family: var(--font);
-      font-size: 1.5em;
-      text-align: center;
-
-      background-color: var(--boblebaggrund);
-      color: #000000; /*Denne ændrer farven på skrivende tekst i "skriv dit eget svar"*/
-
-      border: 2px solid var(--boblefarvekant);
-      border-radius: 50px;
-
-      backdrop-filter: blur(6px);
-
-      outline: none;
-    }
-
-/*Ændrer farven på "skriv eget svar"*/
-    #egetSvar::placeholder {
-      color: rgb(255, 255, 255);
-    }
-
-    #egetSvarBoble {
-      width: 120px;
-      height: 80px;
-
-      border-radius: 50px;
-      border: white;
-
-      background-color: rgba(255, 255, 255, 0.667);
-      color: rgb(255, 255, 255);
-
-      font-family: var(--font);
-      font-size: 1.2em;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-
-      cursor: pointer; /*Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
-    }
-
-
-    .inputContainer {
-      position: fixed;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      opacity: 0;
-      transition: opacity 2s ease;
-    }
-
-    .visInput {
-      opacity: 1;
-    }
+            .visInput {
+            opacity: 1;
+            }
 
 
 /*------Wordcloud--------------------------------------*/
-/*<-----Wordcloud----->*/
     /*Den container som indeholder wordclouden, både titel og indhold*/
     .wordcloud {
       display: none; /*Skjuler wordclouden indtil vi gør den synlig med vores javascript*/
@@ -393,4 +379,26 @@
       line-height: 1;
       font-weight: 900; /*Gør teksten federe*/
       text-transform: uppercase; /*Blokbogstaver*/
+    }
+
+
+    
+/*------Restart knappen--------------------------------------*/
+    #restartKnap {
+      position: fixed; /*Positionen af knappen*/
+      top: 0px;
+      right: 20px;
+
+      padding: 8px 16px;
+
+      font-size: 4rem; /*Størrelsen på symbolet*/
+      color: var(--tekst);
+
+      border: none;
+      border-radius: 10px;
+
+      cursor: pointer; /*Når man holder musen over, så ændre musen sig. Dette gør det tydeligere at det er en knap*/
+
+      z-index: 2000;
+      background-color: transparent; /*Gør at knappen bliver gennemsigtig*/
     }
