@@ -1,5 +1,7 @@
 "use strict";
 
+console.log("JavaScript kører")
+
 //--------Dom referencer--------------------------------------------------------
 
     //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id
@@ -12,10 +14,14 @@
         const inputContainer = document.querySelector(".inputContainer");
         const egetSvar = document.getElementById("egetSvar");
         const egetSvarBoble = document.getElementById("egetSvarBoble");
+        const bobleLyd = document.getElementById("bobleLyd");
+
         const wordcloudContainer = document.getElementById("wordcloudContainerId");
         const wordcloudId = document.getElementById("wordcloudId");
-        const resetKnap = document.getElementById("resetKnapId");
-        const bobleLyd = document.getElementById("bobleLyd");
+        
+        //const resetKnap = document.getElementById("resetKnapId");
+    
+
 
 
 
@@ -25,6 +31,8 @@
         async function startWebcam() { //Venter på adgang til kameraet før funktionen må kører
             const stream = await navigator.mediaDevices.getUserMedia({ video: true }); //Vi opretter en variabel som skal gemme det videosignal som kameraet levere, så vi kan sende videre til vores html. Denne linje gør også at der bliver spurgt adgang til kameraet, hvis bruger siger ja, så går den i gang
             document.getElementById("webcam").srcObject = stream; //Vi henter html elementet id "webcam" og sætter dens srcObject til stream
+
+            console.log("Webcam er tændt");
         }
         startWebcam(); //Funktionen kører nu 
 
@@ -44,6 +52,8 @@
         <span class="linje">Denne oplevelse handler om dig og din identitet. Hvordan vi ser os selv og hvordan andre ser os. </span>
         `,
         ];
+
+        console.log(introTekster);
 
 
     //<-----Status og variabler----->  
@@ -99,7 +109,9 @@
                   setTimeout(() => {
                     klikVidere.classList.add("visKlikVidere");
                   }, 8000); //Efter 8 sekunder bliver vores klikVidere synlig
-                }, 2000); //Der går 2 sekunder før funktionen bliver affyrret
+                }, 1500); //Der går 2 sekunder før funktionen bliver affyrret
+
+                console.log("Intro funktion kører");
             }
 
 //--------Progress Bar--------------------------------------------------------
@@ -110,6 +122,7 @@
             const current = nuvaerendeSpoergsmaal; //Her gemmer vi det spørgsmål vi er kommet til i en variabel, så vi kan bruge det i funktionen
             const procent = (current / total) * 100; //Her regner vi ud hvor mange procent af quizzen vi er kommet igennem
             progressFyld.style.width = procent + "%"; //Her sætter vi bredden på progressFyld elementet til den procent vi har regnet ud, og tilføjer "%" for at gøre det til procent. Altså så når man er kommet 1/3 igennem, viser den en bar der er fyldt 33% ud
+        console.log("Progress bar funktion virker");
         }
 
 
@@ -163,7 +176,7 @@
         },
         ];
 
-
+        console.log(spoergsmaal);
 
     //<-----Status og variabler----->
         //Her har vi lavet en variable med værdien 0, så vi kan holde styr på hvor vi er kommet til. Vi bruger let fordi at vi ved at værdien vil ændre sig. 0 fordi i et arrayet starter indeks på 0
@@ -212,6 +225,7 @@
             svarBobler.style.opacity = 1; //Boblerne bliver helt synlig
             inputContainer.classList.add("visInput");
           }, 2000); //Her sætter vi tiden til 2 sekunder
+          console.log("Vis spørgsmål funktion virker");
         }
 
 
@@ -244,10 +258,9 @@
                     wordcloudId.style.display = "block"; //Her sætter vi display på wordcloudId elementet til "block", så wordclouden dukker op på skærmen
                     visWordcloud();
                  }
+                 console.log("Nu er svaret gemt", brugerSvar);
                 }
                 
-
-                //console.log(brugerSvar);
             
 
     //<-----Eget svar gemmes - Event listener på send knap----->
@@ -260,6 +273,8 @@
             const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; //Her gemmer vi det spørgsmål vi er kommet til i en variable, så vi kan bruge det i funktionen gemSvar
 
             gemSvar(spoergsmaalData.id, tekst); //Funktionen gemSvar sender spørgsmålets id videre sammen med den tekst der er i inputfeltet, så det kan gemmes på samme måde som de andre svar
+
+            console.log("Eget svar er gemt", tekst);
         });
 
 
@@ -302,14 +317,15 @@
                 }
 
                 ordArray.sort((a, b) => b.antal - a.antal); //Her sorterer vi ordArray ved at den sammenligner to elementer og ser hvilket der har det højeste antal (den højeste optælling). Det ord med den højeste optælling bliver vist først, altså den får index [0]
+                console.log("Optælling og sortering af ordArray", ordArray); //Med denne console.log kan vi se den sorterede liste i konsollen
 
                 if (ordArray.length === 0) return; //Hvis listen er tom, så gør vi ikke noget
 
                 const maxAntal = ordArray[0].antal; //Her gemmer vi det ord med den højeste optælling i en const maxAntal, som vi med .sort har fået til at være ordArray[0].antal 
+                
+            //-----Centering af ordene i ordArray i funktionen-----
                 let centreretArray =[]; //Vi vil gerne have lagt vores højeste ord i midten af listen, så vi laver et nyt tomt array til det 
 
-
-            //-----Centering af ordene i ordArray i funktionen-----
                 ordArray.forEach((ordObj, index) => {
                     //Vi laver et loop i sortede ordArray. Her tager den hvert ord et efter et, og holder øje med hvilket nummer i rækken (index) 
                     if (index % 2 === 0) { //Hvis index er lige (altså 0, 2, 4...), så tilføjer vi ordObj til slutningen af centreretArray 
@@ -317,7 +333,7 @@
                     } 
 
                     else {
-                        centreretArray.unshift(ordObj); //Hvis tallet ikke er lige = derimod er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray 
+                        centreretArray.unshift(ordObj); //Hvis tallet ikke er lige = så er ulige (altså 1, 3, 5...), så tilføjer vi ordObj til starten af centreretArray 
                     }
                 });
 
@@ -326,13 +342,13 @@
                 const farvePalet = [
                     //Museum Ovartacis farver
                     "#FA9D00",
-                    "#595959",
-                    "#301F15",
-                    "#B58054",
-                    "#1B4B81",
-                    "#E14000",
+                    "#ed8c71ff",
+                    "#4fcbe1ff",
+                    "#fdf03bff",
+                    "#227de5ff",
+                    "#f55718ff",
                     "#E8272E",
-                    "#87BA05",
+                    "#1ec935ff",
                 ]; 
 
 
@@ -362,6 +378,7 @@
 
                     wordcloudContainer.appendChild(span); //Her tilføjes et HTML-element på siden, så det bliver vist på siden
                 });
+                console.log("Wordcloud virker");
         }
 
             //  //<-----Reset knap----->
@@ -399,15 +416,16 @@
                     inaktivTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder
 
                     setTimeout(() => {
-                        //Efter 2,5 sekunder (2500 ms), så sker følgende:
+                        //Efter 2 sekunder (2000 ms), så sker følgende:
                         inaktivTekst.style.display = "none"; //Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none"
                         klikVidere.style.display = "none"; //Klik for at fortsætte bliver usynlig når quizzen starter
                         quiz.style.display = "block"; //Her får vi quiz elementet til at dukke op ved at sætte display til "block"
                         visSpoergsmaal(); //Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter
-                    }, 2500); //Her sætter vi tiden til 2500 ms, så det sker efter 2,5 sekunder
+                    }, 2000); //Her sætter vi tiden til 2000 ms, så det sker efter 2 sekunder
 
                     introStep++; //Her øger vi værdien af introStep med 1
                 }
+            console.log("Start flow fungerer");
         }
 
             //<-----Restart flow----->
@@ -423,6 +441,7 @@
           inaktivTekst.classList.remove("introTo"); //Fjerner classen introTo, så den ikke forstyrrer styling af den første introtekst
           inaktivTekst.classList.add("introEt"); //Sørger for at den første introtekst har den rigtige styling ved at fjerne classen introTo og tilføje classen introEt
           quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none"
+          console.log("Siden er Restartet");
         }
 
         restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra
