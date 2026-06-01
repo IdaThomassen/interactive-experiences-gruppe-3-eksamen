@@ -10,6 +10,7 @@ console.log("JavaScript kører")
         const progressFyld = document.getElementById("progressFyld");
         const quiz = document.querySelector(".quiz");
         const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
+        const anonymTekst = document.getElementById("anonymTekst");
         const svarBobler = document.getElementById("svarBobler");
         const inputContainer = document.querySelector(".inputContainer");
         const egetSvar = document.getElementById("egetSvar");
@@ -198,12 +199,14 @@ console.log("JavaScript kører")
           inputContainer.classList.remove("visInput");
           egetSvar.value = ""; //egetSvar værdi bliver tømt
           spoergsmaalTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder
+          anonymTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra anonymTekst, så bliver den usynlig
 
           //-----Spørgsmål fader ind-----
           setTimeout(() => {
             //Efter 1 sekund (1000 ms), så sker følgende:
             spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; //Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
             spoergsmaalTekst.classList.add("vis"); //Denne linje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst
+            anonymTekst.classList.add("vis"); //Denne linje tilføjer CSS-klassen "vis" til elementet anonymTekst
           }, 1000); //Her sætter vi tiden til 1 sekund
 
           //-----Svarmuligheder og input kommer senere-----

@@ -167,8 +167,16 @@
             opacity: 0; /*Denne gør teksten usynlig*/
             transition: opacity 1s; /*Denne linje animeres med en transition, som gør teksten fra usynlig til synlig på 1 sek*/
             font-size: 3em;
+            margin-bottom: 1px;
         }
 
+
+    /*-----Anonym tekst-----*/
+        #anonymTekst {
+            opacity: 0;
+            font-size: 1em;
+            transition: opacity 1s ease;
+        }
 
     /*<-----Svarmuligheder Bobler----->*/
         /*Her er den overordnede stil for boblerne*/
@@ -382,7 +390,7 @@
     }
 
 
-    
+
 /*------Restart knappen--------------------------------------*/
     #restartKnap {
       position: fixed; /*Positionen af knappen*/
