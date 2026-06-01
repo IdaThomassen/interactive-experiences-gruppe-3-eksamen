@@ -21,7 +21,8 @@ console.log("JavaScript kører")
         const wordcloudId = document.getElementById("wordcloudId");
         
         //const resetKnap = document.getElementById("resetKnapId");
-    
+        
+
 
 
 
@@ -60,6 +61,8 @@ console.log("JavaScript kører")
     //<-----Status og variabler----->  
         let introStep = 0; //Vi laver en variable der hedder introStep, som starter på 0, så vi kan holde styr på hvilket intro tekst vi er kommet til. 0 fordi i et arrayet starter indeks på 0
 
+        let aktiveTimeouts = []; //Array til at gemme aktive timeouts
+
     //<-----Intro funktion----->
 
         //Vi skal lave en funktion som viser vores introtekster, denne funktion kalder vi for visIntro()
@@ -69,8 +72,8 @@ console.log("JavaScript kører")
 
                     klikVidere.classList.remove("visKlikVidere");
 
-                setTimeout(() => {
-                  //Vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools)
+                aktiveTimeouts.push(setTimeout(() => {
+                  //Vi bruger den inbygget javascript funktion setTimeout(), som kalder på en funktion efter x antal tid (fra w3 schools). Den pusher vi så ind i aktiveTimeouts arrayet
 
                   //-----Rengøring-----
                   inaktivTekst.classList.remove("introEt", "introTo"); //Derfor sørger vi for at fjerne de to class navne, så vi ikke risikerer at den ikke ender med at have begge på en gang
@@ -95,22 +98,22 @@ console.log("JavaScript kører")
 
                   //-----Vis linjer med forsinkelse + tryk for at fortsætte vise-----
                   //Vi vil have lavet sådan at hver linje får en class der hedder "visLinje" med et tidsrum imellem
-                  setTimeout(() => {
+                  aktiveTimeouts.push(setTimeout(() => {
                     linjer[0].classList.add("visLinje"); //Vi tilføjer classen "visLinje" til den første linje, som vi med css styler til at blive synlig
-                  }, 1000);
+                  }, 1000));
 
-                  setTimeout(() => {
+                  aktiveTimeouts.push(setTimeout(() => {
                     linjer[1].classList.add("visLinje");
-                  }, 4000); //Bliver synlig efter 4 sekunder
+                  }, 4000)); //Bliver synlig efter 4 sekunder
 
-                  setTimeout(() => {
+                  aktiveTimeouts.push(setTimeout(() => {
                     linjer[2].classList.add("visLinje");
-                  }, 7000); //Bliver synlig efter 7 sekunder
+                  }, 7000)); //Bliver synlig efter 7 sekunder
 
                   setTimeout(() => {
                     klikVidere.classList.add("visKlikVidere");
                   }, 8000); //Efter 8 sekunder bliver vores klikVidere synlig
-                }, 1500); //Der går 2 sekunder før funktionen bliver affyrret
+                }, 1500)); //Der går 2 sekunder før funktionen bliver affyrret
 
                 console.log("Intro funktion kører");
             }
@@ -202,15 +205,15 @@ console.log("JavaScript kører")
           anonymTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra anonymTekst, så bliver den usynlig
 
           //-----Spørgsmål fader ind-----
-          setTimeout(() => {
+          aktiveTimeouts.push(setTimeout(() => {
             //Efter 1 sekund (1000 ms), så sker følgende:
             spoergsmaalTekst.textContent = spoergsmaalData.spoergsmaalTekst; //Denne linje sætter teksten fra spørgsmålet ind på hjemmesiden
             spoergsmaalTekst.classList.add("vis"); //Denne linje tilføjer CSS-klassen "vis" til elementet spørgsmålTekst
             anonymTekst.classList.add("vis"); //Denne linje tilføjer CSS-klassen "vis" til elementet anonymTekst
-          }, 1000); //Her sætter vi tiden til 1 sekund
+          }, 1000)); //Her sætter vi tiden til 1 sekund
 
           //-----Svarmuligheder og input kommer senere-----
-          setTimeout(() => {
+          aktiveTimeouts.push(setTimeout(() => {
             //Efter 4 sekunder,så sker der følgende
 
             spoergsmaalData.svarmuligheder.forEach((svar) => {
@@ -227,7 +230,7 @@ console.log("JavaScript kører")
             });
             svarBobler.style.opacity = 1; //Boblerne bliver helt synlig
             inputContainer.classList.add("visInput");
-          }, 2000); //Her sætter vi tiden til 2 sekunder
+          }, 2000)); //Her sætter vi tiden til 2 sekunder
           console.log("Vis spørgsmål funktion virker");
         }
 
@@ -418,13 +421,13 @@ console.log("JavaScript kører")
                 else if ( introStep === introTekster.length - 1 ) { //Her tjekker vi om introStep er lig med længden af introTekster minus 1, fordi array starter på 0, så det sidste element er længden minus 1
                     inaktivTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra inaktivTekst, så den forsvinder
 
-                    setTimeout(() => {
+                    aktiveTimeouts.push(setTimeout(() => {
                         //Efter 2 sekunder (2000 ms), så sker følgende:
                         inaktivTekst.style.display = "none"; //Her får vi inaktivTekst til at forsvinde helt ved at sætte display til "none"
                         klikVidere.style.display = "none"; //Klik for at fortsætte bliver usynlig når quizzen starter
                         quiz.style.display = "block"; //Her får vi quiz elementet til at dukke op ved at sætte display til "block"
                         visSpoergsmaal(); //Her kalder vi på funktionen visSpoergsmaal, så det første spørgsmål vises når quizzen starter
-                    }, 2000); //Her sætter vi tiden til 2000 ms, så det sker efter 2 sekunder
+                    }, 2000)); //Her sætter vi tiden til 2000 ms, så det sker efter 2 sekunder
 
                     introStep++; //Her øger vi værdien af introStep med 1
                 }
@@ -434,7 +437,9 @@ console.log("JavaScript kører")
             //<-----Restart flow----->
             //Dette er en funktion der først går i gang, når man trykker på knappen
         function restartFlow() {
-          nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstilles og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0
+          aktiveTimeouts.forEach(clearTimeout); //Laver et loop gennem alle aktive timeouts og rydder dem
+          aktiveTimeouts = []; //Her rydder vi arrayet med aktive timeouts, så det er klar til at gemme nye timeouts for det nye flow
+            nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstilles og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0
           introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten
           progressFyld.style.width = "0%"; //Denne linje sørger for at progress baren bliver nulstillet ved at sætte bredden på progressFyld til 0%
           wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none"
@@ -443,6 +448,7 @@ console.log("JavaScript kører")
           inaktivTekst.classList.add("vis"); //Tilføjer css classen "vis" til inaktivTekst, så den bliver synlig igen
           inaktivTekst.classList.remove("introTo"); //Fjerner classen introTo, så den ikke forstyrrer styling af den første introtekst
           inaktivTekst.classList.add("introEt"); //Sørger for at den første introtekst har den rigtige styling ved at fjerne classen introTo og tilføje classen introEt
+          klikVidere.style.display = "block"; //Gør klik for at fortsætte synlig igen
           quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none"
           console.log("Siden er Restartet");
         }
