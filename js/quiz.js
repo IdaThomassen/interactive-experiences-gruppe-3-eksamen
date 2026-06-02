@@ -455,9 +455,8 @@ const wordcloudId = document.getElementById("wordcloudId");
                 restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra
 
     
-
-//----------------------------------------------------------------  
-inaktivTekst.classList.add("vis");
-klikVidere.classList.add("visKlikVidere");
+        inaktivTekst.classList.add("vis");
+        klikVidere.classList.add("visKlikVidere");
  
+
 

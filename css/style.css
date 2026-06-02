@@ -29,8 +29,21 @@
         }
 
 
+/*------Webcam--------------------------------------*/
+    video#webcam {
+      position: fixed; /*Dette gør at skærmen bliver fastlåst uden scoll*/
+      top: 0;
+      left: 0; /*Starter i toppen men i venstre hjørne*/
+      width: 100%; /*Fylder hele bredden*/
+      height: 100%; /*Fylder højden af skærmen*/
+      object-fit: cover; /*Videocam fylder hele skærmen*/
+      z-index: -1; /*Placere elementer bagved de andre elementer*/
+      transform: scaleX(-1); /*Spejlvender videoen*/
+    }
 
-/*------Intro tekst--------------------------------------*/
+
+
+/*------Intro--------------------------------------*/
     /*<-----Intro teksten----->*/
         #inaktivTekst {
         opacity: 0; /*Dette gør teksten usynlig*/
@@ -70,21 +83,10 @@
 
 
 
-/*------Webcam--------------------------------------*/
-    video#webcam {
-      position: fixed; /*Dette gør at skærmen bliver fastlåst uden scoll*/
-      top: 0;
-      left: 0; /*Starter i toppen men i venstre hjørne*/
-      width: 100%; /*Fylder hele bredden*/
-      height: 100%; /*Fylder højden af skærmen*/
-      object-fit: cover; /*Videocam fylder hele skærmen*/
-      z-index: -1; /*Placere elementer bagved de andre elementer*/
-      transform: scaleX(-1); /*Spejlvender videoen*/
-    }
 
 
 
-/*------Progress baren--------------------------------------*/
+/*------Progress bar--------------------------------------*/
      #progressContainer {
      position: fixed;
      top: 20px;
