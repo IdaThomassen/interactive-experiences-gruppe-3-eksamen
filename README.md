@@ -179,3 +179,41 @@ Funktionerne er navngivet ud fra deres handling, så det er tydeligt, hvad de g�
 Samlet set gør de beskrivende navne og brug af camelCase koden mere overskuelig og struktureret.
 
 ---
+
+## Udvalgt kode - Centrale valg
+### De besøgendes svar bliver gemt - function gemSvar()
+Formålet med vores digitale interaktive løsning er at skabe refleksion over identitet og selvopfattelse. Derfor er funktionen gemSvar() er en af de mest centrale funktioner i vores løsning. Funktionen er central for løsningen, da det er her brugerens interaktion finder sted. De besøgendes svar renses og gemmes i local storage, så de kan indgå i den fælles wordcloud. Samtidig styrer funktionen quizforløbet ved at føre brugeren videre til næste spørgsmål. Når alle spørgsmål er besvaret, kaldes funktionen visWordcloud(), som viser wordclouden med de gemte svar fra både den aktuelle og tidligere besøgende.
+
+På Museum Ovartaci handler oplevelsen om identitet og selvopfattelse. Ved at bruge besøgendes svar i en wordcloud bliver de selv en del af udstillingen og medskaber af oplevelsen. Når besøgende ser sit eget og andres svar i wordclouden, skaber det en forbindelse mellem mennesker i museumsrummet, selvom de ikke nødvendigvis er der samtidigt.
+
+
+### En guidet oplevelse - function startFlow
+En af de centrale funktioner i vores løsning er startFlow(), som har til opgave at styre brugerens bevægelse gennem oplevelsen og sikre, at indholdet vises i den rigtige rækkefølge. Når den besøgende klikker på skærmen, afgør funktionen, om der skal vises næste introtekst, eller om quizzen skal startes. Det sker ved at funktionen bruger introStep til at holde styr på, hvilken tekst der vises, og når den sidste tekst er nået, skjules introen og quizzen starter. 
+
+Dette er et vigtigt designvalg, da vi ønskede at skabe en guidet oplevelse frem for at præsentere alt indhold på én gang. Funktionen er derfor central, fordi den skaber en sammenhængende overgang mellem introen og quizzen og samtidig gør brugeren til en aktiv deltager i oplevelsen. Den bidrager til en rolig og fokuseret oplevelse, hvor den gradvise præsentation af indhold hjælper med at fastholde den besøgendes opmærksomhed og understøtter installationens formål om refleksion. 
+
+---
+
+## ORCA-tabel og datamapping
+I vores projekt bruges ORCA-tabellen til at identificere de centrale dataobjekter og deres attributter. Disse objekter bliver efterfølgende omsat til JavaScript-strukturer, som anvendes i programmet.
+Nedenfor ses et eksempel fra vores ORCA-tabel, hvor spørgsmål og svar er opstillet som objekter. 
+
+| Objekt | Relation | Call to action | Attributter |
+|--------------|----------|----------|---------------|
+| Spørgsmål    |      Spørgsmål stilles til de besøgende    |   Vise spørgsmål       | id     |
+|              |      Spørgsmål stilles af spejlet    |     Modtage svar på spørgsmål     | spoergsmaalTekst     |
+|              |      Spørgsmål besvares med svar   |          | svarmuligheder     |
+|              |          |          | lyd     |
+
+Vi brugte vores ORCA tabel til at lave vores JavaScripts arrays struktur. Attributterne fra ORCA-modellen bruges til egenskaberne i JavaScript-objektet.
+
+![Her er et billede af vores orca array](/billederTilReadme/orcaJsarrayStructure.png "Billede-orca-array") 
+
+I arrayet kan man se, at en af attributterne for spørgsmål er id, hvor hvert spørgsmål har sit eget id. Derudover har hvert spørgsmål en spoergsmaalTekst, som indeholder selve spørgsmålets tekst. 
+Hvert spørgsmål har også svarmuligheder, som er en af de attributter, der er tilføjet til objektet spørgsmål.
+
+### Objektet svar
+Objektet Svar håndteres gennem datastrukturen brugerSvar. Her gemmes den besøgendes svar med spørgsmålets id som nøgle. På den måde kan hvert svar kobles direkte til det spørgsmål, det hører til.
+Derudover gemmes svarende til det sidste spørgsmål i browserens Local Storage. Disse svar anvendes senere til at generere den wordcloud, som brugeren præsenteres for ved afslutningen af oplevelsen. Hvert svar gemmes som en tekststreng i et array under nøglen wordcloud Svar.
+
+---
