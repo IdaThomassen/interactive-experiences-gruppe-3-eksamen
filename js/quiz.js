@@ -6,6 +6,7 @@
 //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id
 const inaktivTekst = document.getElementById("inaktivTekst");
 const klikVidere = document.getElementById("klikVidere");
+const restartKnap = document.getElementById("restartKnap");
 const progressFyld = document.getElementById("progressFyld");
 const quiz = document.querySelector(".quiz");
 const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
