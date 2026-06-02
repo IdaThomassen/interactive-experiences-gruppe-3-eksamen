@@ -194,13 +194,13 @@ console.log("JavaScript kører")
     //<-----Funktion som viser spørgsmål og svarmuligheder----->
         function visSpoergsmaal() {
           opdaterProgressBar(); //Her kalder vi på funktionen opdaterProgressBar, så den bliver opdateret hver gang vi kommer til et nyt spørgsmål
-          const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; // Her gemmer vi det spørgsmål vi er kommet til i variablen spoergsmaalData
+          const spoergsmaalData = spoergsmaal[nuvaerendeSpoergsmaal]; //Her gemmer vi det spørgsmål vi er kommet til i variablen spoergsmaalData
 
           //-----Rengøring-----
           svarBobler.innerHTML = ""; //Her tømmer vi vores boble element (svarmuligheder), så det er klar til at vise de nye svarmuligheder
           svarBobler.style.opacity = 0; //Boblerne bliver usynlige
           inputContainer.classList.remove("visInput");
-          egetSvar.value = ""; //egetSvar værdi bliver tømt
+          egetSvar.value = ""; //EgetSvar værdi bliver tømt
           spoergsmaalTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra spørgsmåltekst, så den forsvinder
           anonymTekst.classList.remove("vis"); //Her fjerner vi classen 'vis' fra anonymTekst, så bliver den usynlig
 
@@ -403,7 +403,7 @@ console.log("JavaScript kører")
 
         document.body.addEventListener("click", startFlow); //Her har vi tilføjet en event listener til hele body element, hvor vi har sagt den skal lytte efter et click og derefter affyre funktionen startFlow
 
-        function startFlow(event) {   //Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på
+        function startFlow(event) {  //Her har vi lavet en funktion startFlow, som tager event som parameter, så vi kan tjekke hvad der bliver klikket på
             if (
                 event.target.tagName === "BUTTON" || //Hvis der bliver klikket på en knap
                 event.target.tagName === "INPUT" //Hvis der bliver klikket på et input felt
@@ -434,31 +434,31 @@ console.log("JavaScript kører")
             console.log("Start flow fungerer");
         }
 
-            //<-----Restart flow----->
+         //<-----Restart flow----->
             //Dette er en funktion der først går i gang, når man trykker på knappen
-        function restartFlow() {
-          aktiveTimeouts.forEach(clearTimeout); //Laver et loop gennem alle aktive timeouts og rydder dem
-          aktiveTimeouts = []; //Her rydder vi arrayet med aktive timeouts, så det er klar til at gemme nye timeouts for det nye flow
-            nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstilles og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0
-          introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten
-          progressFyld.style.width = "0%"; //Denne linje sørger for at progress baren bliver nulstillet ved at sætte bredden på progressFyld til 0%
-          wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none"
-          inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block"
-          inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
-          inaktivTekst.classList.add("vis"); //Tilføjer css classen "vis" til inaktivTekst, så den bliver synlig igen
-          inaktivTekst.classList.remove("introTo"); //Fjerner classen introTo, så den ikke forstyrrer styling af den første introtekst
-          inaktivTekst.classList.add("introEt"); //Sørger for at den første introtekst har den rigtige styling ved at fjerne classen introTo og tilføje classen introEt
-          klikVidere.style.display = "block"; //Gør klik for at fortsætte synlig igen
-          quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none"
-          console.log("Siden er Restartet");
-        }
+            function restartFlow() {
+                aktiveTimeouts.forEach(clearTimeout); //Laver et loop gennem alle aktive timeouts og rydder dem
+                aktiveTimeouts = []; //Her rydder vi arrayet med aktive timeouts, så det er klar til at gemme nye timeouts for det nye flow
+                    nuvaerendeSpoergsmaal = 0; //Her bliver quizzen nulstilles og ryger tilbage til spørgsmål 1. Det gør den ved at sætte nuvaerendeSpoergsmaal til 0
+                introStep = 0; //Her sker det samme, bare med introteksten. Så den starter nu fra "træd nærmere" teksten
+                progressFyld.style.width = "0%"; //Denne linje sørger for at progress baren bliver nulstillet ved at sætte bredden på progressFyld til 0%
+                wordcloudId.style.display = "none"; //Nu bliver wordclouden skjult igen ved at sætte display til "none"
+                inaktivTekst.style.display = "block"; //Gør introteksten synlig igen ved at sætte display til "block"
+                inaktivTekst.textContent = "Træd tættere på og se dig selv i øjnene"; //Sørger for at den rette tekst bliver vist
+                inaktivTekst.classList.add("vis"); //Tilføjer css classen "vis" til inaktivTekst, så den bliver synlig igen
+                inaktivTekst.classList.remove("introTo"); //Fjerner classen introTo, så den ikke forstyrrer styling af den første introtekst
+                inaktivTekst.classList.add("introEt"); //Sørger for at den første introtekst har den rigtige styling ved at fjerne classen introTo og tilføje classen introEt
+                klikVidere.style.display = "block"; //Gør klik for at fortsætte synlig igen
+                quiz.style.display = "none"; //Fjerner quizzen fra skærmen ved at sætte display til "none"
+                console.log("Siden er Restartet");
+                }
 
-        restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra
+                restartKnap.addEventListener("click", restartFlow); //Når man klikker på knappen, så kører den restartFlow funktionen, som starter hele flowet forfra
 
     
 
 //----------------------------------------------------------------  
 inaktivTekst.classList.add("vis");
 klikVidere.classList.add("visKlikVidere");
-
+ 
 
