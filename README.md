@@ -81,7 +81,6 @@ Projektet er udviklet og dokumenteret gennem GitHub.
 
 * At dokumentere vores udviklingsproces gennem løbende commits. Alle commits er navngivet med en dybdegående beskrivelse, som gør det nemt for de andre at følge udviklingsprocessen.
 
-![Det er vores mappestruktur](/billederTilReadme/mappeStruktur.png "Mappestruktur")
 
 
 ---
@@ -92,6 +91,7 @@ Navngivning af mapper, filer, variabler og funktioner skal være relevante for i
 Altid start med lille forbogstav i navngivningen.
 Ingen special tegn eller danske bogstaver som æ, ø og å, bliver brugt til navngivning.
 Skrives med camelCase
+
 
 ---
 
@@ -106,5 +106,76 @@ sound/
 bobleLyd.mp3
 
 Folder and file structure: tag et billede af vores mapper og undermapper og beskriv kort hvad der er hvad og hvordan det er skrevet
+
+---
+
+# Mappe-og filstruktur
+Vores projekt er organiseret i en klar og logisk rodstruktur, som gør det nemt at navigere i. Strukturen følger web konventionerne.
+
+![Det er vores mappestruktur](/billederTilReadme/mappeStruktur.png "Mappestruktur")
+
+
+
+# Filstruktur
+
+## index.html
+
+Index-filen er placeret direkte i roden, så vi er sikre på, at det er den fil, der bliver læst først af browseren.
+
+Index.html er projektets main-fil og indeholder den grundlæggende struktur for vores interaktive løsning. Vores index-fil indeholder alle de HTML-elementer, som vores JavaScript og CSS arbejder med.
+
+### Strukturen for vores index-fil:
+* Webcam  
+* Boble Lyd  
+* Inaktiv tekst  
+* Forsæt knap  
+* Progress bar  
+* Quiz  
+* Wordcloud  
+* Restart knap  
+
+## css/style.css
+
+Mappen `css/` indeholder vores stylesheet `style.css`. Det er i vores `style.css`, hvor vi styler udseendet af alle vores elementer. Det er her vi bl.a. har lavet animationer med `@keyframes`, sat layout til flexbox, skriftstørrelse osv.
+
+### Strukturen for style.css:
+* Root  
+* Body  
+* Webcam  
+* Intro  
+* Progress bar  
+* Tryk for at fortsætte  
+* Quizzen  
+* Wordcloud  
+* Restart knap  
+
+## js/quiz.js
+
+I roden findes mappen `js/`, hvori JavaScript-filen `quiz.js` er placeret. Det er i `quiz.js`, hvor vi gør vores elementer inaktive og funktionelle. Det er bl.a. gennem scriptet, hvor vi har defineret variabler, hvor funktionen `visIntro` viser introtekster og tilføjet click events på bobler, så ens svar bliver gemt i local storage.
+
+### quiz.js er struktureret således:
+* DOM referencer  
+* Webcam  
+* Intro  
+* Progress bar  
+* Quiz - spørgsmål og svarmuligheder  
+* Wordcloud  
+* Flow 
+
+## sound/ bobleLyd.mp3
+Mappen sound/ indeholder alle vores lydfiler. Den indeholde lydfilen bobleLyd.mp3, som bruges som kliklyd til vores bobler (svarmulighederne). 
+
+---
+
+## Navngivning af variabler og funktioner
+I vores Javascript-kode har vi lagt vægt på at bruge tydelige og beskrivende navne til både variabler og funktioner. Formålet er at gøre koden lettere at læse og forstå, så det hurtigt er tydeligt, hvad de forskellige dele af koden bruges til.
+Vi bruger camelCase til navngivning, hvilket er standard i JavaScript. Det betyder, at vi skriver navnene uden mellemrum, og hvert nyt ord starter med stort bogstav, for eksempel nuvaerendeSpoergsmaal, visSpoergsmaal() og gemSvar().
+
+### Variabler
+Variabelnavne er valgt ud fra, hvad de indeholder eller repræsenterer. For eksempel gemmer vi introTekster i en liste med introduktionstekster, mens spoergsmaal indeholder alle quizspørgsmål. Variablen brugerSvar bruges til at samle de svar, som brugeren giver undervejs.
+
+### Funktioner
+Funktionerne er navngivet ud fra deres handling, så det er tydeligt, hvad de gør. For eksempel viser startWebcam() webcam-billedet, visIntro() viser introduktionsteksterne, visSpoergsmaal() viser spørgsmålene i quizzen, og gemSvar() gemmer brugerens svar.
+Samlet set gør de beskrivende navne og brug af camelCase koden mere overskuelig og struktureret.
 
 ---
