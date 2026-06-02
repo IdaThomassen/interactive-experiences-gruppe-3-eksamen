@@ -1,26 +1,24 @@
-"use strict";
+'use strict';
 
-console.log("JavaScript kører")
 
 //--------Dom referencer--------------------------------------------------------
 
-    //For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id
-        const inaktivTekst = document.getElementById("inaktivTekst");
-        const klikVidere = document.getElementById("klikVidere");
-        const progressFyld = document.getElementById("progressFyld");
-        const quiz = document.querySelector(".quiz");
-        const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
-        const anonymTekst = document.getElementById("anonymTekst");
-        const svarBobler = document.getElementById("svarBobler");
-        const inputContainer = document.querySelector(".inputContainer");
-        const egetSvar = document.getElementById("egetSvar");
-        const egetSvarBoble = document.getElementById("egetSvarBoble");
-        const bobleLyd = document.getElementById("bobleLyd");
-
-        const wordcloudContainer = document.getElementById("wordcloudContainerId");
-        const wordcloudId = document.getElementById("wordcloudId");
+//For at vi kan gribe fat i vores html elementer, gemmer vi dem i konstanter ved at bruge deres id
+const inaktivTekst = document.getElementById("inaktivTekst");
+const klikVidere = document.getElementById("klikVidere");
+const progressFyld = document.getElementById("progressFyld");
+const quiz = document.querySelector(".quiz");
+const spoergsmaalTekst = document.getElementById("spoergsmaalTekst");
+const anonymTekst = document.getElementById("anonymTekst");
+const svarBobler = document.getElementById("svarBobler");
+const inputContainer = document.querySelector(".inputContainer");
+const egetSvar = document.getElementById("egetSvar");
+const egetSvarBoble = document.getElementById("egetSvarBoble");
+const bobleLyd = document.getElementById("bobleLyd");
+const wordcloudContainer = document.getElementById("wordcloudContainerId");
+const wordcloudId = document.getElementById("wordcloudId");
         
-        //const resetKnap = document.getElementById("resetKnapId");
+//const resetKnap = document.getElementById("resetKnapId");
         
 
 
