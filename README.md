@@ -217,3 +217,34 @@ Objektet Svar håndteres gennem datastrukturen brugerSvar. Her gemmes den besøg
 Derudover gemmes svarende til det sidste spørgsmål i browserens Local Storage. Disse svar anvendes senere til at generere den wordcloud, som brugeren præsenteres for ved afslutningen af oplevelsen. Hvert svar gemmes som en tekststreng i et array under nøglen wordcloud Svar.
 
 ---
+
+## JavaScript datastruktur
+
+![Det her er datasturktur af dataspoergsmaal](/billederTilReadme/constSpoergsmaal.png "dataspoergsmaal")
+
+Projektets data er organiseret som et array af JavaScript-objekter kaldet spoergsmaal. Hvert objekt repræsenterer et spørgsmål i quizzen og indeholder tre egenskaber: 
+Id: id er en number, som bruges til at identificere hvert spørgsmål. 
+SpoergsmaalTekst: spoergsmaalTekst er en string, som indeholder et spørgsmål.
+Svarmuligheder: svarmuligheder er et array af strings, som indeholder de svar, brugeren kan vælge imellem.
+
+Datastrukturen bruges til at gøre quizzen dynamisk. Programmet løber arrayet igennem og viser spørgsmålene ét ad gangen, sammen med de tilhørende svarmuligheder. Når brugeren vælger et svar, gemmes det og sender brugeren videre til næste spørgsmål. 
+
+Projektet anvender også et objekt kaldet brugerSvar, som gemmer brugerens svar. 
+Dette objekt består af nøgle-værdi-par, altså spørgsmålets id fungerer som nøgle, og brugerens svar gemmes som en string. 
+Derudover anvendes arrays og strings til at gemme og vise ord i vores wordcloud, mens Local Storage bruges til at gemme svar fra tidligere besøgende.
+
+---
+
+## Kommentar i JS, HTML and CSS filer
+Kommentarer har været en stor prioritet i vores kode. Alt kode er grundigt dokumenteret med kommentarer, for at sikre en høj kode forståelse på tværs af alle gruppemedlemmer. Med kommentarer gør det det meget nemmere at forstå og overskue, hvad de forskellige dele af koden gør.
+
+### Vores generelle regler for vores kommentarer:
+* Kommentarer i html skrives: <!-- -->
+* Kommentar i js skrives: //
+* Kommentar i css skrives: /* */
+* Sektionens Overskrifter skrives: —-----Overskift—----------------------------
+* Underoverskifter skrives: ←—Underoverskift—-->
+* Normale kommentar på kode skrives bare som en normal sætning
+* Starter med stort bogstav 
+
+
