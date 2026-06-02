@@ -72,3 +72,39 @@ Fejl 3: Vi tilføjede restartKnap som en const sammen med de øvrige variabler, 
 
 ![Tilføjet restartKnap som en const](/billederTilReadme/constRestartKnap.png "Vi tilføjet const restartKnap til resten af const")
 
+## Github
+Projektet er udviklet og dokumenteret gennem GitHub.
+
+#### Her har vi brugt GitHub til:
+
+* At samarbejde i gruppen. Ved at oprette et repository og invitere de andre gruppemedlemmer, er det muligt at klone det ned på ens egen computer. Dermed kan alle gruppemedlemmer arbejde på koden fra sin egen computer. Det skaber en mere effektiv og fleksibel arbejdsfordeling, da man ikke er afhængig af en persons computer.
+
+* At dokumentere vores udviklingsproces gennem løbende commits. Alle commits er navngivet med en dybdegående beskrivelse, som gør det nemt for de andre at følge udviklingsprocessen.
+
+![Det er vores mappestruktur](/billederTilReadme/mappeStruktur.png "Mappestruktur")
+
+
+---
+
+## Web konventioner for navngivning 
+For at sørge for at vores løsning lever op til web konventionerne, har vi sat følgende regler:
+Navngivning af mapper, filer, variabler og funktioner skal være relevante for indholdet.
+Altid start med lille forbogstav i navngivningen.
+Ingen special tegn eller danske bogstaver som æ, ø og å, bliver brugt til navngivning.
+Skrives med camelCase
+
+---
+
+## Navngivning af filer og mapper
+Med disse regler i mente, har vi navngivet vores filer og mapper med de relevante navne:
+index.html
+css/
+style.css
+js/
+quiz.js
+sound/
+bobleLyd.mp3
+
+Folder and file structure: tag et billede af vores mapper og undermapper og beskriv kort hvad der er hvad og hvordan det er skrevet
+
+---
