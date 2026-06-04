@@ -1,4 +1,5 @@
-# interactive-experiences-gruppe-3-eksamen
+# 5. Prototypeovervejelser - Dette processdokument er lavet i fællesskab
+### interactive-experiences-gruppe-3-eksamen
 
 ## Eksamensprojekt: Det interaktive spejl
 
@@ -81,7 +82,7 @@ Projektet er udviklet og dokumenteret gennem GitHub.
 
 * At dokumentere vores udviklingsproces gennem løbende commits. Alle commits er navngivet med en dybdegående beskrivelse, som gør det nemt for de andre at følge udviklingsprocessen.
 
-
+![Insight i Github](/billederTilReadme/insightGithub.png "Insight i Github")
 
 ---
 
@@ -181,16 +182,20 @@ Samlet set gør de beskrivende navne og brug af camelCase koden mere overskuelig
 ---
 
 ## Udvalgt kode - Centrale valg
-### De besøgendes svar bliver gemt - function gemSvar()
+### De besøgendes svar bliver gemt - function gemSvar() med localStorage
 Formålet med vores digitale interaktive løsning er at skabe refleksion over identitet og selvopfattelse. Derfor er funktionen gemSvar() er en af de mest centrale funktioner i vores løsning. Funktionen er central for løsningen, da det er her brugerens interaktion finder sted. De besøgendes svar renses og gemmes i local storage, så de kan indgå i den fælles wordcloud. Samtidig styrer funktionen quizforløbet ved at føre brugeren videre til næste spørgsmål. Når alle spørgsmål er besvaret, kaldes funktionen visWordcloud(), som viser wordclouden med de gemte svar fra både den aktuelle og tidligere besøgende.
 
 På Museum Ovartaci handler oplevelsen om identitet og selvopfattelse. Ved at bruge besøgendes svar i en wordcloud bliver de selv en del af udstillingen og medskaber af oplevelsen. Når besøgende ser sit eget og andres svar i wordclouden, skaber det en forbindelse mellem mennesker i museumsrummet, selvom de ikke nødvendigvis er der samtidigt.
+
+![Funktionen gemSvar](/billederTilReadme/billedeAfFunktiongemSvar.png "Funktionen gemSvar")
 
 
 ### En guidet oplevelse - function startFlow
 En af de centrale funktioner i vores løsning er startFlow(), som har til opgave at styre brugerens bevægelse gennem oplevelsen og sikre, at indholdet vises i den rigtige rækkefølge. Når den besøgende klikker på skærmen, afgør funktionen, om der skal vises næste introtekst, eller om quizzen skal startes. Det sker ved at funktionen bruger introStep til at holde styr på, hvilken tekst der vises, og når den sidste tekst er nået, skjules introen og quizzen starter. 
 
 Dette er et vigtigt designvalg, da vi ønskede at skabe en guidet oplevelse frem for at præsentere alt indhold på én gang. Funktionen er derfor central, fordi den skaber en sammenhængende overgang mellem introen og quizzen og samtidig gør brugeren til en aktiv deltager i oplevelsen. Den bidrager til en rolig og fokuseret oplevelse, hvor den gradvise præsentation af indhold hjælper med at fastholde den besøgendes opmærksomhed og understøtter installationens formål om refleksion. 
+
+![Funktionen startFlow](/billederTilReadme/billedeAfFunktiontartFlow.png "Funktionen startFlow")
 
 ---
 
@@ -246,5 +251,61 @@ Kommentarer har været en stor prioritet i vores kode. Alt kode er grundigt doku
 * Underoverskifter skrives: ←—Underoverskift—-->
 * Normale kommentar på kode skrives bare som en normal sætning
 * Starter med stort bogstav 
+
+---
+
+## Brug af AI
+Vi har brugt AI-værktøjer som ChatGPT, Claude og Gemini som støtte i udviklingen af vores kode. ChatGPT er især blevet brugt til at hjælpe med at opbygge strukturen i koden og flowet mellem introduktion, spørgsmål og gemning af svar. AI er også blevet brugt til forklaring af kode, fejlfinding og forslag til forbedringer, mens vi selv har stået for at implementere og tilpasse løsningen.
+
+
+Prompt: Forklaring af JavaScript Quiz og Wordcloud (Gemini): https://gemini.google.com/share/86db1967a8e2
+
+### Her er alle vores promts som vi har brugt til kode:
+
+<br>
+
+#### ChatGPT:
+
+ChatGPT prompt – Anonym tekst under spørgsmål.
+<https://chatgpt.com/share/6a1dc520-30bc-83eb-9fbf-bf2920abaf73> [Set maj 2026] 
+
+ChatGPT prompt – Fejl i introTekster.
+<https://chatgpt.com/share/6a18517d-a110-83eb-8c0e-4982b8fcd9e6> [Set maj 2026]  
+
+ChatGPT prompt – Fejl i JavaScript kode.
+<https://chatgpt.com/share/6a1fd713-ebe0-83eb-a814-6b4ccb681310> [Set maj 2026]  
+
+ChatGPT prompt – Fejl i kode.
+<https://chatgpt.com/share/6a1fd5c7-dd00-83eb-8f4c-8254dea748b8> [Set 27. maj 2026] 
+
+ChatGPT prompt – Fejl i restartFlow().
+<https://chatgpt.com/share/6a1dd012-961c-83eb-bf4a-75d4f8bf3204> [Set maj 2026] 
+
+ChatGPT prompt – Klik for at fortsætte.
+<https://chatgpt.com/share/6a1ae61d-6f18-83eb-8d6d-c01c26030353> [Set 30. maj 2026] 
+
+ChatGPT prompt – Trinvis fade-in animation.
+<https://chatgpt.com/share/6a19355b-4f18-83eb-86ba-3d3098eb54f9> [Set maj 2026] 
+
+ChatGPT prompt – Quiz datatruktur i JS.
+<https://chatgpt.com/share/6a180f6d-78f8-83eb-b5db-e59155775d26> [Set 26. maj 2026] 
+
+<br>
+
+#### Claude:
+Claude prompt – Webcam som baggrund på webpage.
+<https://claude.ai/share/3820d24d-a89d-4bda-b2ba-2a7f02102edf> [Set 25. maj 2026] 
+
+<br>
+
+#### Gemini:
+Gemini prompt – Dynamisk Wordcloud Styling.
+<https://gemini.google.com/share/fb4760efad5c> [Set 29. maj 2026] 
+
+Gemini prompt – Forklaring af JavaScript Quiz og Wordcloud. 
+<https://gemini.google.com/share/86db1967a8e2> [Set 26. maj 2026] 
+
+
+
 
 
